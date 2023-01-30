@@ -18,7 +18,7 @@ class API::DriversController < ApplicationController
     @driver = Driver.new(driver_params)
 
     if @driver.save
-      render json: @driver, status: :created, location: @driver
+      render json: @driver, status: :created
     else
       render json: @driver.errors, status: :unprocessable_entity
     end
@@ -46,6 +46,6 @@ class API::DriversController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def driver_params
-      params.require(:driver).permit(:first_name, :last_name, :birth_date, :email, :phone_number, :address1, :address2, :city, :state, :postal_code, :country, :vehicle_id, :license_number, :license_class, :license_state)
+      params.require(:driver).permit(:first_name, :last_name, :birth_date, :email, :phone_number, :address1, :address2, :city, :state, :postal_code, :country, :license_number, :license_class, :license_state)
     end
 end

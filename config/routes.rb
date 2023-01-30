@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root 'status#index'
 
   namespace :api do
+    resources :dashboard, only: [:index]
     resources :drivers
     resources :issues
     resources :vehicles do

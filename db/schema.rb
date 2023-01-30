@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_30_052354) do
+ActiveRecord::Schema.define(version: 2023_01_30_064100) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "assignments", force: :cascade do |t|
-    t.bigint "driver_id"
-    t.bigint "vehicle_id"
+    t.bigint "driver_id", null: false
+    t.bigint "vehicle_id", null: false
     t.datetime "start_date"
     t.datetime "end_date"
     t.integer "start_odometer"

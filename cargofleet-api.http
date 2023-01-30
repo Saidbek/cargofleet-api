@@ -1,0 +1,78 @@
+### create vehicle
+
+POST http://localhost:3000/api/vehicles
+Content-Type: application/json
+
+{
+  "make": "Accord",
+  "model": "Honda",
+  "manufacture_year": "2022-01-20",
+  "color": "red",
+  "plate_number": "BV9123V",
+  "engine_number": "1992312309GJAK1293",
+  "fuel_type": "diesel"
+}
+
+### get vehicles
+GET http://localhost:3000/api/vehicles
+
+### create issue
+POST http://localhost:3000/api/issues
+Content-Type: application/json
+
+{
+  "vehicle_id": "9",
+  "title": "Change oil",
+  "description":  "Go ahead and change immediately",
+  "priority": "high",
+  "reported_at":  "2023-01-29"
+}
+
+### create driver
+POST http://localhost:3000/api/drivers
+Content-Type: application/json
+
+{
+  "first_name": "Mike",
+  "last_name": "Tyson",
+  "birth_date": "1985-01-15",
+  "email": "mike@tyson.com",
+  "phone_number": "+14372394298",
+  "address1": "12 James St",
+  "city": "Vancouver",
+  "state": "BC",
+  "postal_code": "V3J0K5",
+  "country": "Canada",
+  "license_number": "BV01291",
+  "license_class": "5",
+  "license_state": "BC"
+}
+
+### create assignment
+POST http://localhost:3000/api/vehicles/9/assign
+Content-Type: application/json
+
+{
+  "assignment": {
+    "driver_id": "1",
+    "title": "Change oil",
+    "description":  "Go ahead and change immediately",
+    "priority": "high",
+    "reported_at":  "2023-01-29",
+    "start_date": "2023-01-20",
+    "start_odometer": "100"
+  }
+}
+
+### create unassignment
+POST http://localhost:3000/api/vehicles/9/unassign
+Content-Type: application/json
+
+{
+  "assignment_id": "1",
+  "assignment": {
+    "end_odometer": "100",
+    "end_date":  "2023-01-25",
+    "comment": "Finish it!"
+  }
+}
