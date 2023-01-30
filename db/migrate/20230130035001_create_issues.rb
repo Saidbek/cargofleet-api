@@ -5,7 +5,7 @@ class CreateIssues < ActiveRecord::Migration[5.2]
       t.string :title
       t.text :description
       t.integer :priority
-      t.datetime :due_date
+      t.datetime :reported_at
 
       t.timestamps
     end

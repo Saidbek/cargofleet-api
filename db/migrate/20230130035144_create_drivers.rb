@@ -12,7 +12,6 @@ class CreateDrivers < ActiveRecord::Migration[5.2]
       t.string :state
       t.string :postal_code
       t.string :country
-      t.belongs_to :vehicle, foreign_key: true
       t.string :license_number
       t.string :license_class
       t.string :license_state

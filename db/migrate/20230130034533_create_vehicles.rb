@@ -6,7 +6,7 @@ class CreateVehicles < ActiveRecord::Migration[5.2]
       t.date :manufacture_year
       t.string :color
       t.string :image
-      t.string :late_number
+      t.string :plate_number
       t.string :engine_number
       t.integer :fuel_type
 

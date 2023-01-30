@@ -10,10 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_30_035144) do
+ActiveRecord::Schema.define(version: 2023_01_30_052354) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "assignments", force: :cascade do |t|
+    t.bigint "driver_id"
+    t.bigint "vehicle_id"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.integer "start_odometer"
+    t.integer "end_odometer"
+    t.text "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["driver_id"], name: "index_assignments_on_driver_id"
+    t.index ["vehicle_id"], name: "index_assignments_on_vehicle_id"
+  end
 
   create_table "drivers", force: :cascade do |t|
     t.string "first_name"
@@ -27,13 +41,11 @@ ActiveRecord::Schema.define(version: 2023_01_30_035144) do
     t.string "state"
     t.string "postal_code"
     t.string "country"
-    t.bigint "vehicle_id"
     t.string "license_number"
     t.string "license_class"
     t.string "license_state"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["vehicle_id"], name: "index_drivers_on_vehicle_id"
   end
 
   create_table "issues", force: :cascade do |t|
@@ -41,7 +53,7 @@ ActiveRecord::Schema.define(version: 2023_01_30_035144) do
     t.string "title"
     t.text "description"
     t.integer "priority"
-    t.datetime "due_date"
+    t.datetime "reported_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["vehicle_id"], name: "index_issues_on_vehicle_id"
@@ -53,13 +65,14 @@ ActiveRecord::Schema.define(version: 2023_01_30_035144) do
     t.date "manufacture_year"
     t.string "color"
     t.string "image"
-    t.string "late_number"
+    t.string "plate_number"
     t.string "engine_number"
     t.integer "fuel_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "drivers", "vehicles"
+  add_foreign_key "assignments", "drivers"
+  add_foreign_key "assignments", "vehicles"
   add_foreign_key "issues", "vehicles"
 end
