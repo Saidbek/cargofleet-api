@@ -3,10 +3,10 @@ require 'faker'
 unless Vehicle.any?
   # create vehicles
   80.times.map do
-    make = Faker::Vehicle.make
+    brand = Faker::Vehicle.make
     vehicle_attrs = {
-      make: make,
-      model: Faker::Vehicle.model(make_of_model: make),
+      make: brand,
+      model: Faker::Vehicle.model(make_of_model: brand),
       manufacture_year: Faker::Date.between(from: Date.today - 2.years, to: Date.today),
       color: Faker::Color.color_name,
       plate_number: Faker::Alphanumeric.alpha(number: 10).upcase,
