@@ -1,11 +1,11 @@
-class API::VehiclesController < ApplicationController
+class API::VehiclesController < API::BaseController
   before_action :set_vehicle, only: [:show, :update, :destroy, :assign, :unassign]
 
   # GET /vehicles
   def index
-    @vehicles = Vehicle.all
+    @vehicles = paginate_query(Vehicle.order(:id), params)
 
-    render json: @vehicles
+    render_paginated_response @vehicles
   end
 
   # GET /vehicles/1

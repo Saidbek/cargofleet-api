@@ -1,11 +1,11 @@
-class API::IssuesController < ApplicationController
+class API::IssuesController < API::BaseController
   before_action :set_issue, only: [:show, :update, :destroy]
 
   # GET /issues
   def index
-    @issues = Issue.all
+    @issues = paginate_query(Issue.order(:id), params)
 
-    render json: @issues
+    render_paginated_response @issues
   end
 
   # GET /issues/1

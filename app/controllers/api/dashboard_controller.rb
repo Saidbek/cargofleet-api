@@ -1,4 +1,4 @@
-class API::DashboardController < ApplicationController
+class API::DashboardController < API::BaseController
   def index
     {
       issues: {

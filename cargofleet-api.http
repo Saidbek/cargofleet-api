@@ -1,5 +1,13 @@
-### create vehicle
+### get vehicles
+GET http://localhost:3000/api/vehicles
 
+### get issues
+GET http://localhost:3000/api/issues
+
+### get drivers
+GET http://localhost:3000/api/drivers/
+
+### create vehicle
 POST http://localhost:3000/api/vehicles
 Content-Type: application/json
 
@@ -12,9 +20,6 @@ Content-Type: application/json
   "engine_number": "1992312309GJAK1293",
   "fuel_type": "diesel"
 }
-
-### get vehicles
-GET http://localhost:3000/api/vehicles
 
 ### create issue
 POST http://localhost:3000/api/issues
@@ -55,12 +60,9 @@ Content-Type: application/json
 {
   "assignment": {
     "driver_id": "1",
-    "title": "Change oil",
-    "description":  "Go ahead and change immediately",
-    "priority": "high",
-    "reported_at":  "2023-01-29",
-    "start_date": "2023-01-20",
-    "start_odometer": "100"
+    "start_date": "2023-01-02",
+    "start_odometer": "2500",
+    "comment": "Have a safe way!"
   }
 }
 

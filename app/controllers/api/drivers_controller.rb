@@ -1,11 +1,11 @@
-class API::DriversController < ApplicationController
+class API::DriversController < API::BaseController
   before_action :set_driver, only: [:show, :update, :destroy]
 
   # GET /drivers
   def index
-    @drivers = Driver.all
+    @drivers = paginate_query(Driver.order(:id), params)
 
-    render json: @drivers
+    render_paginated_response @drivers
   end
 
   # GET /drivers/1
