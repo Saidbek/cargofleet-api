@@ -10,6 +10,15 @@ class Issue < ApplicationRecord
   end
 
   AS_JSON_OPTS = {
-    include: [:vehicle],
+    only: [
+      :vehicle_id,
+      :title,
+      :description,
+      :priority,
+      :reported_at,
+      :created_at,
+      :updated_at
+    ],
+    include: [:vehicle]
   }.freeze
 end

@@ -1,0 +1,80 @@
+### get vehicles
+GET https://cargofleet-api.fly.dev/api/team1/vehicles
+
+### get issues
+GET https://cargofleet-api.fly.dev/api/team1/issues
+
+### get drivers
+GET https://cargofleet-api.fly.dev/api/team1/drivers/
+
+### create vehicle
+POST https://cargofleet-api.fly.dev/api/team1/vehicles
+Content-Type: application/json
+
+{
+  "brand": "Gaz",
+  "model": "AN-12",
+  "manufacture_year": "2022-01-20",
+  "color": "red",
+  "plate_number": "BV9123V",
+  "engine_number": "1992312309GJAK1293",
+  "fuel_type": "diesel"
+}
+
+### create issue
+POST https://cargofleet-api.fly.dev/api/team1/issues
+Content-Type: application/json
+
+{
+  "vehicle_id": "9",
+  "title": "Change oil",
+  "description":  "Go ahead and change immediately",
+  "priority": "high",
+  "reported_at":  "2023-01-29"
+}
+
+### create driver
+POST https://cargofleet-api.fly.dev/api/team1/drivers
+Content-Type: application/json
+
+{
+  "first_name": "Tom",
+  "last_name": "Fagaro",
+  "birth_date": "1985-01-15",
+  "email": "tom@figaro.com",
+  "phone_number": "+14372394298",
+  "address1": "12 James St",
+  "city": "Vancouver",
+  "state": "BC",
+  "postal_code": "V3J0K5",
+  "country": "Canada",
+  "license_number": "BV01291",
+  "license_class": "5",
+  "license_state": "BC"
+}
+
+### create assignment
+POST https://cargofleet-api.fly.dev/api/team1/vehicles/201/assign
+Content-Type: application/json
+
+{
+  "assignment": {
+    "driver_id": "201",
+    "start_date": "2023-01-02",
+    "start_odometer": "100",
+    "start_comment": "Have a safe way!"
+  }
+}
+
+### create unassignment
+POST https://cargofleet-api.fly.dev/api/team1/vehicles/201/unassign
+Content-Type: application/json
+
+{
+  "assignment_id": "19",
+  "assignment": {
+    "end_odometer": "200",
+    "end_date":  "2023-02-05",
+    "end_comment": "Finish it!"
+  }
+}
