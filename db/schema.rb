@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_02_03_061209) do
+ActiveRecord::Schema.define(version: 2023_02_05_175323) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "accounts", force: :cascade do |t|
+    t.string "name"
+    t.string "subdomain"
+    t.string "domain"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "assignments", force: :cascade do |t|
     t.bigint "driver_id", null: false
@@ -22,9 +30,11 @@ ActiveRecord::Schema.define(version: 2023_02_03_061209) do
     t.datetime "end_date"
     t.integer "start_odometer"
     t.integer "end_odometer"
-    t.text "comment"
+    t.text "start_comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "active", default: true
+    t.string "end_comment"
     t.index ["driver_id"], name: "index_assignments_on_driver_id"
     t.index ["vehicle_id"], name: "index_assignments_on_vehicle_id"
   end
@@ -46,6 +56,8 @@ ActiveRecord::Schema.define(version: 2023_02_03_061209) do
     t.string "license_state"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "account_id"
+    t.index ["account_id"], name: "index_drivers_on_account_id"
   end
 
   create_table "issues", force: :cascade do |t|
@@ -56,6 +68,8 @@ ActiveRecord::Schema.define(version: 2023_02_03_061209) do
     t.datetime "reported_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "account_id"
+    t.index ["account_id"], name: "index_issues_on_account_id"
     t.index ["vehicle_id"], name: "index_issues_on_vehicle_id"
   end
 
@@ -70,6 +84,9 @@ ActiveRecord::Schema.define(version: 2023_02_03_061209) do
     t.integer "fuel_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "account_id"
+    t.boolean "active", default: true
+    t.index ["account_id"], name: "index_vehicles_on_account_id"
   end
 
   add_foreign_key "assignments", "drivers"

@@ -1,19 +1,19 @@
 ### get vehicles
-GET http://localhost:3000/api/vehicles
+GET http://localhost:3000/api/team1/vehicles
 
 ### get issues
-GET http://localhost:3000/api/issues
+GET http://localhost:3000/api/team1/issues
 
 ### get drivers
-GET http://localhost:3000/api/drivers/
+GET http://localhost:3000/api/team1/drivers/
 
 ### create vehicle
-POST http://localhost:3000/api/vehicles
+POST http://localhost:3000/api/team1/vehicles
 Content-Type: application/json
 
 {
-  "brand": "Accord",
-  "model": "Honda",
+  "brand": "Gaz",
+  "model": "AN-12",
   "manufacture_year": "2022-01-20",
   "color": "red",
   "plate_number": "BV9123V",
@@ -22,7 +22,7 @@ Content-Type: application/json
 }
 
 ### create issue
-POST http://localhost:3000/api/issues
+POST http://localhost:3000/api/team1/issues
 Content-Type: application/json
 
 {
@@ -34,14 +34,14 @@ Content-Type: application/json
 }
 
 ### create driver
-POST http://localhost:3000/api/drivers
+POST http://localhost:3000/api/team1/drivers
 Content-Type: application/json
 
 {
-  "first_name": "Mike",
-  "last_name": "Tyson",
+  "first_name": "Tom",
+  "last_name": "Fagaro",
   "birth_date": "1985-01-15",
-  "email": "mike@tyson.com",
+  "email": "tom@figaro.com",
   "phone_number": "+14372394298",
   "address1": "12 James St",
   "city": "Vancouver",
@@ -54,27 +54,27 @@ Content-Type: application/json
 }
 
 ### create assignment
-POST http://localhost:3000/api/vehicles/9/assign
+POST http://localhost:3000/api/team1/vehicles/201/assign
 Content-Type: application/json
 
 {
   "assignment": {
-    "driver_id": "1",
+    "driver_id": "201",
     "start_date": "2023-01-02",
-    "start_odometer": "2500",
-    "comment": "Have a safe way!"
+    "start_odometer": "100",
+    "start_comment": "Have a safe way!"
   }
 }
 
 ### create unassignment
-POST http://localhost:3000/api/vehicles/9/unassign
+POST http://localhost:3000/api/team1/vehicles/201/unassign
 Content-Type: application/json
 
 {
-  "assignment_id": "1",
+  "assignment_id": "19",
   "assignment": {
-    "end_odometer": "100",
-    "end_date":  "2023-01-25",
-    "comment": "Finish it!"
+    "end_odometer": "200",
+    "end_date":  "2023-02-05",
+    "end_comment": "Finish it!"
   }
 }

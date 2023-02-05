@@ -40,8 +40,7 @@ class API::VehiclesController < API::BaseController
 
   # POST /vehicles/1/assign
   def assign
-    @assignment = @vehicle.assignments.build(assignment_params)
-
+    @assignment = @vehicle.assignments.build(assignment_params.merge(active: true))
     if @assignment.save
       render json: @assignment, status: :created
     else
@@ -52,8 +51,11 @@ class API::VehiclesController < API::BaseController
   # POST /vehicles/1/unassign
   def unassign
     @assignment = @vehicle.assignments.find(params[:assignment_id])
-    @assignment.update(unassignment_params)
-    render json: @assignment
+    if @assignment.update(unassignment_params.merge(active: false))
+      render json: @assignment
+    else
+      render json: @assignment.errors, status: :unprocessable_entity
+    end
   end
 
   private
@@ -64,16 +66,16 @@ class API::VehiclesController < API::BaseController
 
     # Only allow a trusted parameter "white list" through.
     def vehicle_params
-      params.require(:vehicle).permit(:brand, :model, :manufacture_year, :color, :image, :plate_number, :engine_number, :fuel_type)
+      params.require(:vehicle).permit(:brand, :model, :manufacture_year, :color, :image, :plate_number, :engine_number, :fuel_type, :active)
     end
 
     # Only allow a trusted parameter "white list" through.
     def assignment_params
-      params.require(:assignment).permit(:driver_id, :start_date, :start_odometer, :comment)
+      params.require(:assignment).permit(:driver_id, :start_date, :start_odometer, :start_comment)
     end
 
     # Only allow a trusted parameter "white list" through.
     def unassignment_params
-      params.require(:assignment).permit(:end_odometer, :end_date, :comment)
+      params.require(:assignment).permit(:end_odometer, :end_date, :end_comment)
     end
 end
