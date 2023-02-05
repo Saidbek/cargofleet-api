@@ -23,7 +23,7 @@ TEAMS.each do |team_name|
           engine_number: Faker::Alphanumeric.alpha(number: 15),
           fuel_type: Vehicle.fuel_types.keys.sample,
           image: Faker::Placeholdit.image(size: '100x100', format: 'jpg'),
-          status: true
+          active: true
         }
         Vehicle.create!(vehicle_attrs)
       end
