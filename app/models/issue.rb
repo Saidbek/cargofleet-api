@@ -11,6 +11,7 @@ class Issue < ApplicationRecord
 
   AS_JSON_OPTS = {
     only: [
+      :id,
       :vehicle_id,
       :title,
       :description,

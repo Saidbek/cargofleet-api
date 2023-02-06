@@ -12,6 +12,7 @@ class Driver < ApplicationRecord
 
   AS_JSON_OPTS = {
     only: [
+      :id,
       :first_name,
       :last_name,
       :birth_date,

@@ -15,6 +15,7 @@ class Vehicle < ApplicationRecord
 
   AS_JSON_OPTS = {
     only: [
+      :id,
       :brand,
       :model,
       :manufacture_year,
