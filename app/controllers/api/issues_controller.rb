@@ -3,7 +3,9 @@ class API::IssuesController < API::BaseController
 
   # GET /issues
   def index
-    @issues = paginate_query(Issue.order(:id), params)
+    @issues = Issue.includes(:vehicle)
+    @issues = sort_and_filter(@issues, filter_columns: [:title])
+    @issues = paginate_query(@issues, params)
 
     render_paginated_response @issues
   end

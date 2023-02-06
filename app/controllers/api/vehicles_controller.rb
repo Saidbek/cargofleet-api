@@ -3,7 +3,9 @@ class API::VehiclesController < API::BaseController
 
   # GET /vehicles
   def index
-    @vehicles = paginate_query(Vehicle.order(:id), params)
+    @vehicles = Vehicle.includes(:driver)
+    @vehicles = sort_and_filter(@vehicles, filter_columns: [:brand, :model])
+    @vehicles = paginate_query(@vehicles, params)
 
     render_paginated_response @vehicles
   end

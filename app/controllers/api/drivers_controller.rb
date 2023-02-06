@@ -3,7 +3,9 @@ class API::DriversController < API::BaseController
 
   # GET /drivers
   def index
-    @drivers = paginate_query(Driver.order(:id), params)
+    @drivers = Driver.includes(:vehicle)
+    @drivers = sort_and_filter(@drivers, filter_columns: [:first_name, :last_name])
+    @drivers = paginate_query(@drivers, params)
 
     render_paginated_response @drivers
   end

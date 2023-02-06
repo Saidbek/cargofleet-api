@@ -1,11 +1,11 @@
 ### get vehicles
-GET http://localhost:3000/api/team1/vehicles
+GET http://localhost:3000/api/team1/vehicles?filter=Dodge
 
 ### get issues
-GET http://localhost:3000/api/team1/issues
+GET http://localhost:3000/api/team1/issues?filter=Ratione
 
 ### get drivers
-GET http://localhost:3000/api/team1/drivers/
+GET http://localhost:3000/api/team1/drivers?direction=asc
 
 ### create vehicle
 POST http://localhost:3000/api/team1/vehicles

@@ -3,12 +3,12 @@ class API::BaseController < ApplicationController
   before_action :set_the_current_tenant
 
   include Pagy::Backend
+  include SortAndFilter
 
   AVAILABLE_TEAMS = %w[team1 team2 team3 team4 team5].freeze
 
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
   rescue_from ActiveRecord::RecordInvalid, with: :record_invalid
-  rescue_from StandardError, with: :record_invalid
 
   private
 
