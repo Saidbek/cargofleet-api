@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   root 'status#index'
 
-  namespace :api do
-    scope "/(:team_name)" do
+  scope "/(:team_name)" do
+    namespace :api do
       resources :dashboard, only: [:index]
       resources :drivers
       resources :vehicles do

@@ -1,14 +1,18 @@
 ### get vehicles
-GET https://cargofleet-api.fly.dev/api/team1/vehicles
+GET https://cargofleet-api.fly.dev/team1/api/vehicles?filter=Nissan
 
 ### get issues
-GET https://cargofleet-api.fly.dev/api/team1/issues
+GET https://cargofleet-api.fly.dev/team1/api/issues?filter=Velit quia
 
 ### get drivers
-GET https://cargofleet-api.fly.dev/api/team1/drivers/
+GET https://cargofleet-api.fly.dev/team1/api/drivers/
+
+### update vehicle
+PUT https://cargofleet-api.fly.dev/team1/api/vehicles/
+Content-Type: application/json
 
 ### create vehicle
-POST https://cargofleet-api.fly.dev/api/team1/vehicles
+POST https://cargofleet-api.fly.dev/team1/api/vehicles
 Content-Type: application/json
 
 {
@@ -22,7 +26,7 @@ Content-Type: application/json
 }
 
 ### create issue
-POST https://cargofleet-api.fly.dev/api/team1/issues
+POST https://cargofleet-api.fly.dev/team1/api/issues
 Content-Type: application/json
 
 {
@@ -34,7 +38,7 @@ Content-Type: application/json
 }
 
 ### create driver
-POST https://cargofleet-api.fly.dev/api/team1/drivers
+POST https://cargofleet-api.fly.dev/team1/api/drivers
 Content-Type: application/json
 
 {
@@ -54,7 +58,7 @@ Content-Type: application/json
 }
 
 ### create assignment
-POST https://cargofleet-api.fly.dev/api/team1/vehicles/201/assign
+POST https://cargofleet-api.fly.dev/team1/api/vehicles/201/assign
 Content-Type: application/json
 
 {
@@ -67,7 +71,7 @@ Content-Type: application/json
 }
 
 ### create unassignment
-POST https://cargofleet-api.fly.dev/api/team1/vehicles/201/unassign
+POST https://cargofleet-api.fly.dev/team1/api/vehicles/201/unassign
 Content-Type: application/json
 
 {
