@@ -1,5 +1,11 @@
+### get dashoard
+GET http://localhost:3000/team1/api/dashboard
+
 ### get vehicles
 GET http://localhost:3000/team1/api/vehicles?filter=Dodge
+
+### get vehicles sort
+GET http://localhost:3000/team1/api/vehicles?sort=brand&direction=asc
 
 ### get issues
 GET http://localhost:3000/team1/api/issues?filter=Ratione

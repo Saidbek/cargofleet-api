@@ -1,6 +1,9 @@
 class Driver < ApplicationRecord
   acts_as_tenant :account
 
+  scope :active_count, -> { where(active: true).count }
+  scope :archived_count, -> { where(active: false).count }
+
   # associations
   has_many :assignments
   has_many :vehicles, through: :assignments
@@ -17,6 +20,19 @@ class Driver < ApplicationRecord
             :state,
             :postal_code,
             :license_number, presence: true
+
+  # methods
+  def self.cached_active_count
+    Rails.cache.fetch(Driver.last, expires_in: 1.minute) do
+      Driver.active_count
+    end
+  end
+
+  def self.cached_archived_count
+    Rails.cache.fetch(Driver.last, expires_in: 1.minute) do
+      Driver.archived_count
+    end
+  end
 
   def as_json(options = {})
     super(AS_JSON_OPTS.merge(options))

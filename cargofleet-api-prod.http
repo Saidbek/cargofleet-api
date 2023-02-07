@@ -1,8 +1,11 @@
 ### get vehicles
-GET https://cargofleet-api.fly.dev/team1/api/vehicles?filter=Nissan
+GET https://cargofleet-api.fly.dev/team1/api/vehicles?sort=brand&direction=desc
+
+### get vehicles sort
+GET https://cargofleet-api.fly.dev/team1/api/vehicles?sort=model&direction=asc
 
 ### get issues
-GET https://cargofleet-api.fly.dev/team1/api/issues?filter=Velit quia
+GET https://cargofleet-api.fly.dev/team1/api/issues
 
 ### get drivers
 GET https://cargofleet-api.fly.dev/team1/api/drivers/
@@ -39,6 +42,18 @@ Content-Type: application/json
   "due_date":  "2023-01-29"
 }
 
+### update issue
+PUT https://cargofleet-api.fly.dev/team1/api/issues/21
+Content-Type: application/json
+
+{
+  "vehicle_id": "39",
+  "title": "Change oil",
+  "description":  "Go ahead and change immediately",
+  "priority": "high",
+  "due_date":  "2023-01-29"
+}
+
 ### create driver
 POST https://cargofleet-api.fly.dev/team1/api/drivers
 Content-Type: application/json
@@ -50,6 +65,7 @@ Content-Type: application/json
   "email": "tom@figaro.com",
   "phone_number": "+14372394298",
   "address1": "12 James St",
+  "address2": "Apt 504",
   "city": "Vancouver",
   "state": "BC",
   "postal_code": "V3J0K5",
