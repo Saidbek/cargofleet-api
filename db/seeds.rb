@@ -12,7 +12,7 @@ TEAMS.each do |team_name|
   ActsAsTenant.with_tenant(Account.find_by(name: team_name)) do
     unless Vehicle.any?
       # create vehicles
-      40.times.map do
+      80.times.map do
         brand = Faker::Vehicle.make
         vehicle_attrs = {
           brand: brand,
@@ -23,7 +23,7 @@ TEAMS.each do |team_name|
           engine_number: Faker::Alphanumeric.alpha(number: 15),
           fuel_type: Vehicle.fuel_types.keys.sample,
           image_url: Faker::LoremFlickr.image,
-          active: true
+          active: [false, true].sample
         }
         Vehicle.create!(vehicle_attrs)
       end
@@ -32,7 +32,7 @@ TEAMS.each do |team_name|
 
     unless Issue.any?
       # create issues
-      40.times.map do
+      50.times.map do
         issue_attrs = {
           vehicle: Vehicle.all.sample,
           title: Faker::Lorem.sentence(word_count: 8),
@@ -46,7 +46,7 @@ TEAMS.each do |team_name|
 
     unless Driver.any?
       # create driver
-      40.times.map do
+      50.times.map do
         first_name = Faker::Name.first_name
         last_name = Faker::Name.last_name
         driver_attrs = {
@@ -62,7 +62,8 @@ TEAMS.each do |team_name|
           country: Faker::Address.country,
           license_number: Faker::Alphanumeric.alpha(number: 10).upcase,
           license_class: Faker::Alphanumeric.alpha(number: 1).upcase,
-          license_state: Faker::Address.state_abbr
+          license_state: Faker::Address.state_abbr,
+          active: [true, false].sample
         }
         Driver.create!(driver_attrs)
       end

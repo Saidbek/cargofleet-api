@@ -1,3 +1,6 @@
+### get dashoard
+GET https://cargofleet-api.fly.dev/team1/api/dashboard
+
 ### get vehicles
 GET https://cargofleet-api.fly.dev/team1/api/vehicles?sort=brand&direction=desc
 

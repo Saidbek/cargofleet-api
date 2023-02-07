@@ -25,27 +25,27 @@ class Vehicle < ApplicationRecord
 
   # methods
   def self.cached_assigned_count
-    Rails.cache.fetch(Vehicle.last, expires_in: 1.minute) do
+    # Rails.cache.fetch(Vehicle.last, expires_in: 1.minute) do
       Vehicle.assigned_count
-    end
+    # end
   end
 
   def self.cached_unassigned_count
-    Rails.cache.fetch(Vehicle.last, expires_in: 1.minute) do
+    # Rails.cache.fetch(Vehicle.last, expires_in: 1.minute) do
       Vehicle.unassigned_count
-    end
+    # end
   end
 
   def self.cached_active_count
-    Rails.cache.fetch(Vehicle.last, expires_in: 1.minute) do
+    # Rails.cache.fetch(Vehicle.last, expires_in: 1.minute) do
       Vehicle.active_count
-    end
+    # end
   end
 
   def self.cached_archived_count
-    Rails.cache.fetch(Vehicle.last, expires_in: 1.minute) do
+    # Rails.cache.fetch(Vehicle.last, expires_in: 1.minute) do
       Vehicle.archived_count
-    end
+    # end
   end
 
 

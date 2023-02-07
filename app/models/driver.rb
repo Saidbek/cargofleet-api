@@ -23,15 +23,15 @@ class Driver < ApplicationRecord
 
   # methods
   def self.cached_active_count
-    Rails.cache.fetch(Driver.last, expires_in: 1.minute) do
+    # Rails.cache.fetch(Driver.last, expires_in: 1.minute) do
       Driver.active_count
-    end
+    # end
   end
 
   def self.cached_archived_count
-    Rails.cache.fetch(Driver.last, expires_in: 1.minute) do
+    # Rails.cache.fetch(Driver.last, expires_in: 1.minute) do
       Driver.archived_count
-    end
+    # end
   end
 
   def as_json(options = {})
