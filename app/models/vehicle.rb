@@ -3,11 +3,21 @@ class Vehicle < ApplicationRecord
 
   enum fuel_type: [:diesel, :gasoline, :propane, :natural_gas]
 
+  # associations
   has_many :issues
   has_many :assignments
   has_many :drivers, through: :assignments
   has_one :active_assignment, -> { where(active: true) }, class_name: 'Assignment'
   has_one :driver, through: :active_assignment
+
+  # validations
+  validates :brand,
+            :model,
+            :manufacture_year,
+            :color,
+            :plate_number,
+            :engine_number,
+            :fuel_type, presence: true
 
   def as_json(options = {})
     super(AS_JSON_OPTS.merge(options))

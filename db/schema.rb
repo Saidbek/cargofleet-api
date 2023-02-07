@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_02_07_002743) do
+ActiveRecord::Schema.define(version: 2023_02_07_064850) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,51 +40,51 @@ ActiveRecord::Schema.define(version: 2023_02_07_002743) do
   end
 
   create_table "drivers", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "birth_date"
-    t.string "email"
+    t.string "first_name", null: false
+    t.string "last_name", null: false
+    t.string "birth_date", null: false
+    t.string "email", null: false
     t.string "phone_number"
-    t.string "address1"
+    t.string "address1", null: false
     t.string "address2"
-    t.string "city"
-    t.string "state"
-    t.string "postal_code"
+    t.string "city", null: false
+    t.string "state", null: false
+    t.string "postal_code", null: false
     t.string "country"
-    t.string "license_number"
+    t.string "license_number", null: false
     t.string "license_class"
     t.string "license_state"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "account_id"
+    t.integer "account_id", null: false
     t.index ["account_id"], name: "index_drivers_on_account_id"
   end
 
   create_table "issues", force: :cascade do |t|
-    t.bigint "vehicle_id"
-    t.string "title"
+    t.bigint "vehicle_id", null: false
+    t.string "title", null: false
     t.text "description"
-    t.integer "priority"
-    t.datetime "reported_at"
+    t.integer "priority", null: false
+    t.datetime "due_date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "account_id"
+    t.integer "account_id", null: false
     t.index ["account_id"], name: "index_issues_on_account_id"
     t.index ["vehicle_id"], name: "index_issues_on_vehicle_id"
   end
 
   create_table "vehicles", force: :cascade do |t|
-    t.string "brand"
-    t.string "model"
-    t.date "manufacture_year"
-    t.string "color"
+    t.string "brand", null: false
+    t.string "model", null: false
+    t.date "manufacture_year", null: false
+    t.string "color", null: false
     t.string "image_url"
-    t.string "plate_number"
-    t.string "engine_number"
-    t.integer "fuel_type"
+    t.string "plate_number", null: false
+    t.string "engine_number", null: false
+    t.integer "fuel_type", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "account_id"
+    t.integer "account_id", null: false
     t.boolean "active", default: true
     t.index ["account_id"], name: "index_vehicles_on_account_id"
   end

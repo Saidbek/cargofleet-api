@@ -76,7 +76,7 @@ TEAMS.each do |team_name|
                              vehicle: vehicle,
                              start_date: Faker::Date.between(from: Date.today - 2.years, to: Date.today),
                              start_odometer: Faker::Number.number(digits: 5),
-                             start_comment: Faker::Lorem.sentence(10))
+                             start_comment: Faker::Lorem.sentence(word_count: 10))
         end
       end
     end

@@ -3,7 +3,13 @@ class Issue < ApplicationRecord
 
   enum priority: [:low, :medium, :high]
 
+  # associations
   belongs_to :vehicle
+
+  # validations
+  validates :title,
+            :priority,
+            :due_date, presence: true
 
   def as_json(options = {})
     super(AS_JSON_OPTS.merge(options))

@@ -1,10 +1,22 @@
 class Driver < ApplicationRecord
   acts_as_tenant :account
 
+  # associations
   has_many :assignments
   has_many :vehicles, through: :assignments
   has_one :active_assignment, -> { where(active: true) }, class_name: 'Assignment'
   has_one :vehicle, through: :active_assignment
+
+  # validations
+  validates :first_name,
+            :last_name,
+            :birth_date,
+            :email,
+            :address1,
+            :city,
+            :state,
+            :postal_code,
+            :license_number, presence: true
 
   def as_json(options = {})
     super(AS_JSON_OPTS.merge(options))
