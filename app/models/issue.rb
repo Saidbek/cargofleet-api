@@ -16,7 +16,7 @@ class Issue < ApplicationRecord
       :title,
       :description,
       :priority,
-      :reported_at,
+      :due_date,
       :created_at,
       :updated_at
     ],
