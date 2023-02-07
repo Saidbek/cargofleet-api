@@ -20,7 +20,7 @@ class Vehicle < ApplicationRecord
       :model,
       :manufacture_year,
       :color,
-      :image,
+      :image_url,
       :plate_number,
       :engine_number,
       :fuel_type,

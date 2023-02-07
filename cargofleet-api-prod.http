@@ -20,9 +20,11 @@ Content-Type: application/json
   "model": "AN-12",
   "manufacture_year": "2022-01-20",
   "color": "red",
+  "image_url": "http://example.com/gaz.png",
   "plate_number": "BV9123V",
   "engine_number": "1992312309GJAK1293",
-  "fuel_type": "diesel"
+  "fuel_type": "diesel",
+  "active": true
 }
 
 ### create issue
