@@ -48,6 +48,6 @@ class API::IssuesController < API::BaseController
 
     # Only allow a trusted parameter "white list" through.
     def issue_params
-      params.require(:issue).permit(:vehicle_id, :title, :description, :priority, :due_date)
+      params.permit(:vehicle_id, :title, :description, :priority, :due_date)
     end
 end

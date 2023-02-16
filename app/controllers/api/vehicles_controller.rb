@@ -68,16 +68,16 @@ class API::VehiclesController < API::BaseController
 
     # Only allow a trusted parameter "white list" through.
     def vehicle_params
-      params.require(:vehicle).permit(:brand, :model, :manufacture_year, :color, :image_url, :plate_number, :engine_number, :fuel_type, :active)
+      params.permit(:brand, :model, :manufacture_year, :color, :image_url, :plate_number, :engine_number, :fuel_type, :active)
     end
 
     # Only allow a trusted parameter "white list" through.
     def assignment_params
-      params.require(:assignment).permit(:driver_id, :start_date, :start_odometer, :start_comment)
+      params.permit(:driver_id, :start_date, :start_odometer, :start_comment)
     end
 
     # Only allow a trusted parameter "white list" through.
     def unassignment_params
-      params.require(:assignment).permit(:end_odometer, :end_date, :end_comment)
+      params.permit(:end_odometer, :end_date, :end_comment)
     end
 end
