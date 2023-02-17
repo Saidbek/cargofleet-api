@@ -8,8 +8,8 @@ class Vehicle < ApplicationRecord
   scope :archived_count, -> { where(active: false).count }
 
   # associations
-  has_many :issues, dependent: :destroy
-  has_many :assignments, dependent: :destroy
+  has_many :issues
+  has_many :assignments
   has_many :drivers, through: :assignments
   has_one :active_assignment, -> { where(active: true) }, class_name: 'Assignment'
   has_one :driver, through: :active_assignment
