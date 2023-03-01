@@ -68,6 +68,6 @@ class Vehicle < ApplicationRecord
       :updated_at,
       :active
     ],
-    include: [:driver],
+    include: [:driver, :active_assignment],
   }.freeze
 end
