@@ -1,8 +1,11 @@
 ### get dashoard
-GET https://cargofleet-api.fly.dev/team2/api/dashboard
+GET https://cargofleet-api.fly.dev/team1/api/dashboard
 
 ### get vehicles
 GET https://cargofleet-api.fly.dev/team1/api/vehicles
+
+### delete a vehicle
+DELETE https://cargofleet-api.fly.dev/team1/api/vehicles/250
 
 ### get vehicles sort
 GET https://cargofleet-api.fly.dev/team1/api/vehicles?sort=model&direction=asc
@@ -33,12 +36,14 @@ Content-Type: application/json
   "active": true
 }
 
+### vehicle id: 832
+
 ### create issue
 POST https://cargofleet-api.fly.dev/team1/api/issues
 Content-Type: application/json
 
 {
-  "vehicle_id": "9",
+  "vehicle_id": "245",
   "title": "Change oil",
   "description":  "Go ahead and change immediately",
   "priority": "high",
@@ -78,28 +83,26 @@ Content-Type: application/json
   "license_state": "BC"
 }
 
+### driver id: 516
+
 ### create assignment
-POST https://cargofleet-api.fly.dev/team1/api/vehicles/201/assign
+POST https://cargofleet-api.fly.dev/team1/api/vehicles/832/assign
 Content-Type: application/json
 
 {
-  "assignment": {
-    "driver_id": "201",
+    "driver_id": "516",
     "start_date": "2023-01-02",
     "start_odometer": "100",
     "start_comment": "Have a safe way!"
-  }
 }
 
 ### create unassignment
-POST https://cargofleet-api.fly.dev/team1/api/vehicles/201/unassign
+POST https://cargofleet-api.fly.dev/team1/api/vehicles/832/unassign
 Content-Type: application/json
 
 {
-  "assignment_id": "19",
-  "assignment": {
-    "end_odometer": "200",
-    "end_date":  "2023-02-05",
-    "end_comment": "Finish it!"
-  }
+  "assignment_id": "86",
+  "end_odometer": "200",
+  "end_date":  "2023-03-10",
+  "end_comment": "Finish it!"
 }

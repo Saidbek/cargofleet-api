@@ -2,7 +2,7 @@
 GET http://localhost:3000/team3/api/dashboard
 
 ### get vehicles
-GET http://localhost:3000/team1/api/vehicles?filter=Dodge
+GET http://localhost:3000/team1/api/vehicles
 
 ### get vehicles sort
 GET http://localhost:3000/team1/api/vehicles?sort=brand&direction=asc
@@ -12,6 +12,9 @@ GET http://localhost:3000/team1/api/issues?filter=Ratione
 
 ### get drivers
 GET http://localhost:3000/team1/api/drivers?direction=asc
+
+### delete a vehicle
+GET http://localhost:3000/team1/api/vehicles/61
 
 ### create vehicle
 POST http://localhost:3000/team1/api/vehicles
