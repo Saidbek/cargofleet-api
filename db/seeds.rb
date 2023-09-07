@@ -9,20 +9,55 @@ unless Account.any?
 end
 
 TEAMS.each do |team_name|
+  freight_trucks = {
+    "Volvo Trucks" => ["Volvo VNL Series", "Volvo VNR Series", "Volvo FH Series"],
+    "Peterbilt" => ["Peterbilt 579", "Peterbilt 389", "Peterbilt 567"],
+    "Kenworth" => ["Kenworth W900", "Kenworth T680", "Kenworth T880"],
+    "Freightliner" => ["Freightliner Cascadia", "Freightliner Coronado", "Freightliner M2"],
+    "Mack Trucks" => ["Mack Anthem", "Mack Pinnacle", "Mack Granite"],
+    "International Trucks" => ["International LoneStar", "International LT Series", "International HV Series"],
+    "Western Star" => ["Western Star 4900", "Western Star 5700XE", "Western Star 4700"],
+    "Scania" => ["Scania R Series", "Scania S Series", "Scania G Series"],
+    "MAN Truck & Bus" => ["MAN TGX", "MAN TGS", "MAN TGM"],
+    "Isuzu Commercial Trucks" => ["Isuzu N-Series", "Isuzu F-Series", "Isuzu NPR"],
+    "Hino Trucks" => ["Hino 195", "Hino 338", "Hino 268"],
+    "Freightliner Custom Chassis" => ["Freightliner MT55", "Freightliner MT45", "Freightliner S2"],
+    "GMC Commercial Trucks" => ["GMC Sierra 2500HD", "GMC Sierra 3500HD", "GMC Savana"],
+    "Ram Commercial Vehicles" => ["Ram ProMaster", "Ram ProMaster City", "Ram 2500"],
+    "Ford Commercial Vehicles" => ["Ford Transit", "Ford Super Duty", "Ford F-650"],
+    "Chevrolet Commercial Vehicles" => ["Chevrolet Silverado 2500HD", "Chevrolet Silverado 3500HD", "Chevrolet Express"],
+    "Nissan Commercial Vehicles" => ["Nissan NV Cargo", "Nissan NV Passenger", "Nissan Titan XD"],
+    "Mercedes-Benz Trucks" => ["Mercedes-Benz Actros", "Mercedes-Benz Arocs", "Mercedes-Benz Econic"],
+    "Iveco Trucks" => ["Iveco Stralis", "Iveco Eurocargo", "Iveco Daily"],
+    "DAF Trucks" => ["DAF XF", "DAF CF", "DAF LF"],
+    "Volvo USA" => ["Volvo VHD", "Volvo VAH"],
+    "PACCAR" => ["Kenworth W990", "Peterbilt 367"],
+    "Fuso" => ["Fuso Canter", "Fuso Fighter"],
+    "Oshkosh Corporation" => ["Oshkosh Striker", "Oshkosh M-ATV"],
+    "Freightliner Australia" => ["Freightliner Argosy", "Freightliner Coronado SD"],
+    "UD Trucks" => ["UD Quon", "UD Quester"],
+    "TATA Motors" => ["TATA Ultra", "TATA Signa"],
+    "Renault Trucks" => ["Renault T", "Renault K"],
+    "FAW" => ["FAW Jiefang J6", "FAW Jiefang J7"],
+    "Ashok Leyland" => ["Ashok Leyland Guru", "Ashok Leyland Captain"],
+    "Higer" => ["Higer KLQ6109GQE", "Higer KLQ6129Q"],
+  }
+
   ActsAsTenant.with_tenant(Account.find_by(name: team_name)) do
     unless Vehicle.any?
       # create vehicles
       80.times.map do
-        brand = Faker::Vehicle.make
+        brand = freight_trucks.keys.sample
+        model = freight_trucks[brand].sample
         vehicle_attrs = {
           brand: brand,
-          model: Faker::Vehicle.model(make_of_model: brand),
+          model: model,
           manufacture_year: Faker::Date.between(from: Date.today - 2.years, to: Date.today),
           color: Faker::Color.color_name,
-          plate_number: Faker::Alphanumeric.alpha(number: 10).upcase,
-          engine_number: Faker::Alphanumeric.alpha(number: 15),
+          plate_number: Faker::Alphanumeric.alpha(number: 8).upcase,
+          engine_number: Faker::Alphanumeric.alphanumeric(number: 16, min_alpha: 1, min_numeric: 1).upcase,
           fuel_type: Vehicle.fuel_types.keys.sample,
-          image_url: Faker::LoremFlickr.image,
+          image_url: Faker::LoremFlickr.image(search_terms: [brand&.tr(' ', '-')&.downcase]),
           active: [false, true].sample
         }
         Vehicle.create!(vehicle_attrs)
