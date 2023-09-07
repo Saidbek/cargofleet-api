@@ -57,7 +57,7 @@ TEAMS.each do |team_name|
           plate_number: Faker::Alphanumeric.alpha(number: 8).upcase,
           engine_number: Faker::Alphanumeric.alphanumeric(number: 16, min_alpha: 1, min_numeric: 1).upcase,
           fuel_type: Vehicle.fuel_types.keys.sample,
-          image_url: Faker::LoremFlickr.image(search_terms: [model&.tr(' ', '-')&.downcase]),
+          image_url: Faker::LoremFlickr.image(search_terms: ["truck"]),
           active: [false, true].sample
         }
         Vehicle.create!(vehicle_attrs)
