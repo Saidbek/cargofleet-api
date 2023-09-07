@@ -1,0 +1,18 @@
+databases:
+  - name: cargofleet-api
+    databaseName: cargofleet-api
+    user: cargofleet-api
+
+services:
+  - type: web
+    name: cargofleet-api
+    runtime: ruby
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec puma -C config/puma.rb"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: cargofleet-api
+          property: connectionString
+      - key: RAILS_MASTER_KEY
+        sync: false

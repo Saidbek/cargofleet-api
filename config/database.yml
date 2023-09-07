@@ -80,6 +80,4 @@ test:
 #
 production:
   <<: *default
-  database: cargofleet-api_production
-  username: cargofleet-api
-  password: <%= ENV['CARGOFLEET-API_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
