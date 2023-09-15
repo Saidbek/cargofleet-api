@@ -1,4 +1,10 @@
 class API::DashboardController < API::BaseController
+  # API Endpoint: /api/dashboard
+  api :GET, '/dashboard', 'Retrieve statistics for the dashboard'
+
+  # Description: This endpoint provides statistics for the dashboard,
+  # including counts of open and overdue issues, active and archived drivers,
+  # and counts of assigned, unassigned, active, and archived vehicles.
   def index
     stats_response = {
       issues: {
@@ -16,6 +22,10 @@ class API::DashboardController < API::BaseController
         archived: Vehicle.cached_archived_count
       }
     }
+
+    # Response:
+    #   - Content-Type: application/json
+    #   - Body: JSON object containing dashboard statistics
     render json: stats_response
   end
 end

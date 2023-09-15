@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  apipie
+
   root 'status#index'
 
   scope "/(:team_name)" do

@@ -48,3 +48,4 @@ gem 'faker'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "dockerfile-rails", ">= 1.0.0", :group => :development
+gem 'apipie-rails'
