@@ -5,8 +5,8 @@ class API::VehiclesController < API::BaseController
   api :GET, '/vehicles', 'Retrieve a list of vehicles'
   param :brand, String, desc: 'Filter by brand (optional)'
   param :model, String, desc: 'Filter by model (optional)'
-  param :page, Integer, desc: 'Page number for pagination (optional)'
-  param :per_page, Integer, desc: 'Number of records per page (optional)'
+  param :page, String, desc: 'Page number for pagination (optional)'
+  param :per_page, String, desc: 'Number of records per page (optional)'
 
   # Description: This endpoint retrieves a paginated list of vehicles, optionally filtered by brand and model.
   def index
@@ -22,7 +22,7 @@ class API::VehiclesController < API::BaseController
 
   # API Endpoint: /api/vehicles/:id
   api :GET, '/vehicles/:id', 'Retrieve a specific vehicle by ID'
-  param :id, Integer, required: true, desc: 'ID of the vehicle to retrieve'
+  param :id, :number, required: true, desc: 'ID of the vehicle to retrieve'
 
   # Description: This endpoint retrieves a specific vehicle by ID.
   def show
@@ -33,7 +33,7 @@ class API::VehiclesController < API::BaseController
   api :POST, '/vehicles', 'Create a new vehicle'
   param :brand, String, desc: 'Brand of the vehicle', required: true
   param :model, String, desc: 'Model of the vehicle', required: true
-  param :manufacture_year, Integer, desc: 'Manufacture year of the vehicle'
+  param :manufacture_year, String, desc: 'Manufacture year of the vehicle'
   param :color, String, desc: 'Color of the vehicle'
   param :image_url, String, desc: 'URL of the vehicle image'
   param :plate_number, String, desc: 'License plate number of the vehicle'
@@ -60,10 +60,10 @@ class API::VehiclesController < API::BaseController
 
   # API Endpoint: /api/vehicles/:id
   api :PATCH, '/vehicles/:id', 'Update an existing vehicle by ID'
-  param :id, Integer, required: true, desc: 'ID of the vehicle to update'
+  param :id, :number, required: true, desc: 'ID of the vehicle to update'
   param :brand, String, desc: 'Brand of the vehicle'
   param :model, String, desc: 'Model of the vehicle'
-  param :manufacture_year, Integer, desc: 'Manufacture year of the vehicle'
+  param :manufacture_year, String, desc: 'Manufacture year of the vehicle'
   param :color, String, desc: 'Color of the vehicle'
   param :image_url, String, desc: 'URL of the vehicle image'
   param :plate_number, String, desc: 'License plate number of the vehicle'
@@ -82,7 +82,7 @@ class API::VehiclesController < API::BaseController
 
   # API Endpoint: /api/vehicles/:id
   api :DELETE, '/vehicles/:id', 'Delete a vehicle by ID'
-  param :id, Integer, required: true, desc: 'ID of the vehicle to delete'
+  param :id, :number, required: true, desc: 'ID of the vehicle to delete'
 
   # Description: This endpoint deletes a vehicle by ID.
   def destroy
@@ -91,10 +91,10 @@ class API::VehiclesController < API::BaseController
 
   # API Endpoint: /api/vehicles/:id/assign
   api :POST, '/vehicles/:id/assign', 'Assign a vehicle to a driver'
-  param :id, Integer, required: true, desc: 'ID of the vehicle to assign'
-  param :driver_id, Integer, desc: 'ID of the driver to assign the vehicle to', required: true
-  param :start_date, Date, desc: 'Date of assignment start', required: true
-  param :start_odometer, Integer, desc: 'Odometer reading at the start of assignment'
+  param :id, :number, required: true, desc: 'ID of the vehicle to assign'
+  param :driver_id, :number, desc: 'ID of the driver to assign the vehicle to', required: true
+  param :start_date, String, desc: 'Date of assignment start', required: true
+  param :start_odometer, String, desc: 'Odometer reading at the start of assignment'
   param :start_comment, String, desc: 'Comment for the assignment start'
 
   # Description: This endpoint assigns a vehicle to a driver.
@@ -115,10 +115,10 @@ class API::VehiclesController < API::BaseController
 
   # API Endpoint: /api/vehicles/:id/unassign
   api :POST, '/vehicles/:id/unassign', 'Unassign a vehicle from a driver'
-  param :id, Integer, required: true, desc: 'ID of the vehicle to unassign'
-  param :assignment_id, Integer, desc: 'ID of the assignment to unassign', required: true
-  param :end_odometer, Integer, desc: 'Odometer reading at the end of assignment'
-  param :end_date, Date, desc: 'Date of assignment end'
+  param :id, :number, required: true, desc: 'ID of the vehicle to unassign'
+  param :assignment_id, :number, desc: 'ID of the assignment to unassign', required: true
+  param :end_odometer, String, desc: 'Odometer reading at the end of assignment'
+  param :end_date, String, desc: 'Date of assignment end'
   param :end_comment, String, desc: 'Comment for the assignment end'
 
   # Description: This endpoint unassigns a vehicle from a driver.

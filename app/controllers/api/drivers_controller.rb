@@ -5,8 +5,8 @@ class API::DriversController < API::BaseController
   api :GET, '/drivers', 'Retrieve a list of drivers'
   param :first_name, String, desc: 'Filter by first name (optional)'
   param :last_name, String, desc: 'Filter by last name (optional)'
-  param :page, Integer, desc: 'Page number for pagination (optional)'
-  param :per_page, Integer, desc: 'Number of records per page (optional)'
+  param :page, String, desc: 'Page number for pagination (optional)'
+  param :per_page, String, desc: 'Number of records per page (optional)'
 
   # Description: This endpoint retrieves a paginated list of drivers, optionally filtered by first name and last name.
   def index
@@ -22,7 +22,7 @@ class API::DriversController < API::BaseController
 
   # API Endpoint: /api/drivers/:id
   api :GET, '/drivers/:id', 'Retrieve a specific driver by ID'
-  param :id, Integer, required: true, desc: 'ID of the driver to retrieve'
+  param :id, :number, required: true, desc: 'ID of the driver to retrieve'
 
   # Description: This endpoint retrieves a specific driver by ID.
   def show
@@ -35,7 +35,7 @@ class API::DriversController < API::BaseController
   # Params for driver creation
   param :first_name, String, desc: 'First name of the driver', required: true
   param :last_name, String, desc: 'Last name of the driver', required: true
-  param :birth_date, Date, desc: 'Date of birth of the driver', required: true
+  param :birth_date, String, desc: 'Date of birth of the driver', required: true
   param :email, String, desc: 'Email address of the driver'
   param :phone_number, String, desc: 'Phone number of the driver'
   param :address1, String, desc: 'Address line 1 of the driver'
@@ -68,12 +68,12 @@ class API::DriversController < API::BaseController
 
   # API Endpoint: /api/drivers/:id
   api :PATCH, '/drivers/:id', 'Update an existing driver by ID'
-  param :id, Integer, required: true, desc: 'ID of the driver to update'
+  param :id, :number, required: true, desc: 'ID of the driver to update'
 
   # Params for driver update
   param :first_name, String, desc: 'First name of the driver'
   param :last_name, String, desc: 'Last name of the driver'
-  param :birth_date, Date, desc: 'Date of birth of the driver'
+  param :birth_date, String, desc: 'Date of birth of the driver'
   param :email, String, desc: 'Email address of the driver'
   param :phone_number, String, desc: 'Phone number of the driver'
   param :address1, String, desc: 'Address line 1 of the driver'
@@ -98,7 +98,7 @@ class API::DriversController < API::BaseController
 
   # API Endpoint: /api/drivers/:id
   api :DELETE, '/drivers/:id', 'Delete a driver by ID'
-  param :id, Integer, required: true, desc: 'ID of the driver to delete'
+  param :id, :number, required: true, desc: 'ID of the driver to delete'
 
   # Description: This endpoint deletes a driver by ID.
   def destroy

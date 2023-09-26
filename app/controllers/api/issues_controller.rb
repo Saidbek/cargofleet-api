@@ -4,8 +4,8 @@ class API::IssuesController < API::BaseController
   # API Endpoint: /api/issues
   api :GET, '/issues', 'Retrieve a list of issues'
   param :title, String, desc: 'Filter by issue title (optional)'
-  param :page, Integer, desc: 'Page number for pagination (optional)'
-  param :per_page, Integer, desc: 'Number of records per page (optional)'
+  param :page, String, desc: 'Page number for pagination (optional)'
+  param :per_page, String, desc: 'Number of records per page (optional)'
 
   # Description: This endpoint retrieves a paginated list of issues, optionally filtered by title.
   def index
@@ -21,7 +21,7 @@ class API::IssuesController < API::BaseController
 
   # API Endpoint: /api/issues/:id
   api :GET, '/issues/:id', 'Retrieve a specific issue by ID'
-  param :id, Integer, required: true, desc: 'ID of the issue to retrieve'
+  param :id, :number, required: true, desc: 'ID of the issue to retrieve'
 
   # Description: This endpoint retrieves a specific issue by ID.
   def show
@@ -30,11 +30,11 @@ class API::IssuesController < API::BaseController
 
   # API Endpoint: /api/issues
   api :POST, '/issues', 'Create a new issue'
-  param :vehicle_id, Integer, desc: 'ID of the associated vehicle'
+  param :vehicle_id, :number, desc: 'ID of the associated vehicle'
   param :title, String, desc: 'Title of the issue', required: true
   param :description, String, desc: 'Description of the issue'
   param :priority, String, desc: 'Priority of the issue'
-  param :due_date, Date, desc: 'Due date of the issue'
+  param :due_date, String, desc: 'Due date of the issue'
 
   # Description: This endpoint creates a new issue.
   def create
@@ -55,11 +55,11 @@ class API::IssuesController < API::BaseController
 
   # API Endpoint: /api/issues/:id
   api :PATCH, '/issues/:id', 'Update an existing issue by ID'
-  param :id, Integer, required: true, desc: 'ID of the issue to update'
+  param :id, :number, required: true, desc: 'ID of the issue to update'
   param :title, String, desc: 'Title of the issue'
   param :description, String, desc: 'Description of the issue'
   param :priority, String, desc: 'Priority of the issue'
-  param :due_date, Date, desc: 'Due date of the issue'
+  param :due_date, String, desc: 'Due date of the issue'
 
   # Description: This endpoint updates an existing issue by ID.
   def update
@@ -72,7 +72,7 @@ class API::IssuesController < API::BaseController
 
   # API Endpoint: /api/issues/:id
   api :DELETE, '/issues/:id', 'Delete an issue by ID'
-  param :id, Integer, required: true, desc: 'ID of the issue to delete'
+  param :id, :number, required: true, desc: 'ID of the issue to delete'
 
   # Description: This endpoint deletes an issue by ID.
   def destroy

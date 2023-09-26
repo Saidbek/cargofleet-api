@@ -1,27 +1,29 @@
 ### get dashoard
-GET https://cargofleet-api.fly.dev/team1/api/dashboard
+GET https://mysite-t3la.onrender.com/team1/api/dashboard
 
 ### get vehicles
-GET https://cargofleet-api.fly.dev/team1/api/vehicles
+#GET https://mysite-t3la.onrender.com/team1/api/vehicles
+GET http://localhost:3000/team1/api/vehicles
 
 ### delete a vehicle
-DELETE https://cargofleet-api.fly.dev/team1/api/vehicles/250
+#DELETE https://mysite-t3la.onrender.com/team1/api/vehicles/2008
+DELETE http://localhost:3000/team1/api/vehicles/61
 
 ### get vehicles sort
-GET https://cargofleet-api.fly.dev/team1/api/vehicles?sort=model&direction=asc
+GET https://mysite-t3la.onrender.com/team1/api/vehicles?sort=model&direction=asc
 
 ### get issues
-GET https://cargofleet-api.fly.dev/team1/api/issues
+GET https://mysite-t3la.onrender.com/team1/api/issues
 
 ### get drivers
-GET https://cargofleet-api.fly.dev/team1/api/drivers/
+GET https://mysite-t3la.onrender.com/team1/api/drivers/
 
 ### update vehicle
-PUT https://cargofleet-api.fly.dev/team1/api/vehicles/
+PUT https://mysite-t3la.onrender.com/team1/api/vehicles/
 Content-Type: application/json
 
 ### create vehicle
-POST https://cargofleet-api.fly.dev/team1/api/vehicles
+POST http://localhost:3000/team1/api/vehicles
 Content-Type: application/json
 
 {
@@ -36,14 +38,15 @@ Content-Type: application/json
   "active": true
 }
 
-### vehicle id: 832
+### get issues
+GET http://localhost:3000/team1/api/issues
 
 ### create issue
-POST https://cargofleet-api.fly.dev/team1/api/issues
+POST http://localhost:3000/team1/api/issues
 Content-Type: application/json
 
 {
-  "vehicle_id": "245",
+  "vehicle_id": "64",
   "title": "Change oil",
   "description":  "Go ahead and change immediately",
   "priority": "high",
@@ -51,7 +54,7 @@ Content-Type: application/json
 }
 
 ### update issue
-PUT https://cargofleet-api.fly.dev/team1/api/issues/21
+PUT http://localhost:3000/team1/api/issues/31
 Content-Type: application/json
 
 {
@@ -63,7 +66,7 @@ Content-Type: application/json
 }
 
 ### create driver
-POST https://cargofleet-api.fly.dev/team1/api/drivers
+POST http://localhost:3000/team1/api/drivers
 Content-Type: application/json
 
 {
@@ -86,23 +89,23 @@ Content-Type: application/json
 ### driver id: 516
 
 ### create assignment
-POST https://cargofleet-api.fly.dev/team1/api/vehicles/832/assign
+POST http://localhost:3000/team1/api/vehicles/404/assign
 Content-Type: application/json
 
 {
-    "driver_id": "516",
+    "driver_id": "251",
     "start_date": "2023-01-02",
     "start_odometer": "100",
     "start_comment": "Have a safe way!"
 }
 
 ### create unassignment
-POST https://cargofleet-api.fly.dev/team1/api/vehicles/832/unassign
+POST http://localhost:3000/team1/api/vehicles/404/unassign
 Content-Type: application/json
 
 {
-  "assignment_id": "86",
+  "assignment_id": "20",
   "end_odometer": "200",
-  "end_date":  "2023-03-10",
+  "end_date":  "2023-10-10",
   "end_comment": "Finish it!"
 }
