@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_02_07_091841) do
+ActiveRecord::Schema.define(version: 2023_09_29_024910) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,9 +28,9 @@ ActiveRecord::Schema.define(version: 2023_02_07_091841) do
     t.bigint "vehicle_id", null: false
     t.datetime "start_date"
     t.datetime "end_date"
-    t.integer "start_odometer"
-    t.integer "end_odometer"
-    t.text "start_comment"
+    t.string "start_odometer"
+    t.string "end_odometer"
+    t.string "start_comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "active", default: true
