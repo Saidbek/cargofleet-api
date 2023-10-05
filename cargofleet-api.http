@@ -47,12 +47,34 @@ POST http://localhost:3000/team1/api/drivers
 Content-Type: application/json
 
 {
+  "first_name": null,
+  "last_name": "Fagaro",
+  "birth_date": "1985-01-15",
+  "email": "tom@figaro.com",
+  "phone_number": "+14372394298",
+  "address1": "12 James St",
+  "address2": null,
+  "city": "Vancouver",
+  "state": "BC",
+  "postal_code": "V3J0K5",
+  "country": "Canada",
+  "license_number": "BV01291",
+  "license_class": "5",
+  "license_state": "BC"
+}
+
+### update driver
+PUT http://localhost:3000/team1/api/drivers/253
+Content-Type: application/json
+
+{
   "first_name": "Tom",
   "last_name": "Fagaro",
   "birth_date": "1985-01-15",
   "email": "tom@figaro.com",
   "phone_number": "+14372394298",
   "address1": "12 James St",
+  "address2": null,
   "city": "Vancouver",
   "state": "BC",
   "postal_code": "V3J0K5",

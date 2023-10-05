@@ -33,20 +33,20 @@ class API::DriversController < API::BaseController
   api :POST, '/drivers', 'Create a new driver'
 
   # Params for driver creation
-  param :first_name, String, desc: 'First name of the driver', required: true
-  param :last_name, String, desc: 'Last name of the driver', required: true
-  param :birth_date, String, desc: 'Date of birth of the driver', required: true
+  param :first_name, String, desc: 'First name of the driver'
+  param :last_name, String, desc: 'Last name of the driver'
+  param :birth_date, String, desc: 'Date of birth of the driver'
   param :email, String, desc: 'Email address of the driver'
-  param :phone_number, String, desc: 'Phone number of the driver'
+  param :phone_number, String, allow_nil: true, desc: 'Phone number of the driver'
   param :address1, String, desc: 'Address line 1 of the driver'
-  param :address2, String, desc: 'Address line 2 of the driver'
+  param :address2, String, allow_nil: true, desc: 'Address line 2 of the driver'
   param :city, String, desc: 'City of residence of the driver'
   param :state, String, desc: 'State or province of residence of the driver'
   param :postal_code, String, desc: 'Postal code of the driver'
-  param :country, String, desc: 'Country of residence of the driver'
+  param :country, String, allow_nil: true, desc: 'Country of residence of the driver'
   param :license_number, String, desc: 'Driver\'s license number'
-  param :license_class, String, desc: 'Driver\'s license class'
-  param :license_state, String, desc: 'State or province of driver\'s license issuance'
+  param :license_class, String, allow_nil: true, desc: 'Driver\'s license class'
+  param :license_state, String, allow_nil: true, desc: 'State or province of driver\'s license issuance'
   param :active, [true, false], desc: 'Indicates whether the driver is active'
 
   # Description: This endpoint creates a new driver.
@@ -75,16 +75,16 @@ class API::DriversController < API::BaseController
   param :last_name, String, desc: 'Last name of the driver'
   param :birth_date, String, desc: 'Date of birth of the driver'
   param :email, String, desc: 'Email address of the driver'
-  param :phone_number, String, desc: 'Phone number of the driver'
+  param :phone_number, String, allow_nil: true, desc: 'Phone number of the driver'
   param :address1, String, desc: 'Address line 1 of the driver'
-  param :address2, String, desc: 'Address line 2 of the driver'
+  param :address2, String, allow_nil: true, desc: 'Address line 2 of the driver'
   param :city, String, desc: 'City of residence of the driver'
   param :state, String, desc: 'State or province of residence of the driver'
   param :postal_code, String, desc: 'Postal code of the driver'
-  param :country, String, desc: 'Country of residence of the driver'
+  param :country, String, allow_nil: true, desc: 'Country of residence of the driver'
   param :license_number, String, desc: 'Driver\'s license number'
-  param :license_class, String, desc: 'Driver\'s license class'
-  param :license_state, String, desc: 'State or province of driver\'s license issuance'
+  param :license_class, String, allow_nil: true, desc: 'Driver\'s license class'
+  param :license_state, String, allow_nil: true, desc: 'State or province of driver\'s license issuance'
   param :active, [true, false], desc: 'Indicates whether the driver is active'
 
   # Description: This endpoint updates an existing driver by ID.

@@ -35,7 +35,7 @@ class API::VehiclesController < API::BaseController
   param :model, String, desc: 'Model of the vehicle', required: true
   param :manufacture_year, String, desc: 'Manufacture year of the vehicle'
   param :color, String, desc: 'Color of the vehicle'
-  param :image_url, String, desc: 'URL of the vehicle image'
+  param :image_url, String, allow_nil: true, desc: 'URL of the vehicle image'
   param :plate_number, String, desc: 'License plate number of the vehicle'
   param :engine_number, String, desc: 'Engine number of the vehicle'
   param :fuel_type, String, desc: 'Fuel type of the vehicle'
@@ -65,7 +65,7 @@ class API::VehiclesController < API::BaseController
   param :model, String, desc: 'Model of the vehicle'
   param :manufacture_year, String, desc: 'Manufacture year of the vehicle'
   param :color, String, desc: 'Color of the vehicle'
-  param :image_url, String, desc: 'URL of the vehicle image'
+  param :image_url, String, allow_nil: true, desc: 'URL of the vehicle image'
   param :plate_number, String, desc: 'License plate number of the vehicle'
   param :engine_number, String, desc: 'Engine number of the vehicle'
   param :fuel_type, String, desc: 'Fuel type of the vehicle'

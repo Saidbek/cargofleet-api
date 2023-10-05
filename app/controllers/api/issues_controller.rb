@@ -31,8 +31,8 @@ class API::IssuesController < API::BaseController
   # API Endpoint: /api/issues
   api :POST, '/issues', 'Create a new issue'
   param :vehicle_id, :number, desc: 'ID of the associated vehicle'
-  param :title, String, desc: 'Title of the issue', required: true
-  param :description, String, desc: 'Description of the issue'
+  param :title, String, desc: 'Title of the issue'
+  param :description, String, allow_nil: true, desc: 'Description of the issue'
   param :priority, String, desc: 'Priority of the issue'
   param :due_date, String, desc: 'Due date of the issue'
 
@@ -57,7 +57,7 @@ class API::IssuesController < API::BaseController
   api :PATCH, '/issues/:id', 'Update an existing issue by ID'
   param :id, :number, required: true, desc: 'ID of the issue to update'
   param :title, String, desc: 'Title of the issue'
-  param :description, String, desc: 'Description of the issue'
+  param :description, String, allow_nil: true, desc: 'Description of the issue'
   param :priority, String, desc: 'Priority of the issue'
   param :due_date, String, desc: 'Due date of the issue'
 
