@@ -5,10 +5,10 @@ class Driver < ApplicationRecord
   scope :archived_count, -> { where(active: false).count }
 
   # associations
-  has_many :assignments
-  has_many :vehicles, through: :assignments
-  has_one :active_assignment, -> { where(active: true) }, class_name: 'Assignment'
-  has_one :vehicle, through: :active_assignment
+  has_many :assignments, dependent: :destroy
+  has_many :vehicles, through: :assignments, dependent: :destroy
+  has_one :active_assignment, -> { where(active: true) }, class_name: 'Assignment', dependent: :destroy
+  has_one :vehicle, through: :active_assignment, dependent: :destroy
 
   # validations
   validates :first_name,
