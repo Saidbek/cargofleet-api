@@ -46,7 +46,7 @@ TEAMS.each do |team_name|
   ActsAsTenant.with_tenant(Account.find_by(name: team_name)) do
     unless Vehicle.any?
       # create vehicles
-      80.times.map do
+      500.times.map do
         brand = freight_trucks.keys.sample
         model = freight_trucks[brand].sample
         vehicle_attrs = {
@@ -67,7 +67,7 @@ TEAMS.each do |team_name|
 
     unless Issue.any?
       # create issues
-      50.times.map do
+      500.times.map do
         issue_attrs = {
           vehicle: Vehicle.all.sample,
           title: Faker::Lorem.sentence(word_count: 8),
@@ -81,7 +81,7 @@ TEAMS.each do |team_name|
 
     unless Driver.any?
       # create driver
-      50.times.map do
+      500.times.map do
         first_name = Faker::Name.first_name
         last_name = Faker::Name.last_name
         driver_attrs = {
@@ -105,7 +105,7 @@ TEAMS.each do |team_name|
     end
 
     unless Assignment.any?
-      20.times.map do
+      100.times.map do
         vehicle = Vehicle.all.sample
         unless vehicle.assignments.exists?(active: true)
           Assignment.create!(driver: Driver.all.sample,
