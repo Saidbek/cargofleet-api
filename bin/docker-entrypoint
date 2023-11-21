@@ -1,5 +1,8 @@
 #!/bin/bash
 
 # Add any container initialization steps here
+bundle install
+bundle exec rake db:migrate
+bundle exec rake db:seed
 
 exec "${@}"
