@@ -3,7 +3,6 @@ class API::VehiclesController < API::BaseController
 
   # API Endpoint: /api/vehicles
   api :GET, '/vehicles', 'Retrieve a list of vehicles'
-  param :brand, String, desc: 'Filter by brand (optional)'
   param :model, String, desc: 'Filter by model (optional)'
   param :page, String, desc: 'Page number for pagination (optional)'
   param :per_page, String, desc: 'Number of records per page (optional)'
@@ -11,7 +10,7 @@ class API::VehiclesController < API::BaseController
   # Description: This endpoint retrieves a paginated list of vehicles, optionally filtered by brand and model.
   def index
     @vehicles = Vehicle.includes(:driver)
-    @vehicles = sort_and_filter(@vehicles, filter_columns: [:brand, :model])
+    @vehicles = sort_and_filter(@vehicles, filter_columns: [:model])
     @vehicles = paginate_query(@vehicles, params)
 
     # Response:
@@ -31,10 +30,8 @@ class API::VehiclesController < API::BaseController
 
   # API Endpoint: /api/vehicles
   api :POST, '/vehicles', 'Create a new vehicle'
-  param :brand, String, desc: 'Brand of the vehicle', required: true
   param :model, String, desc: 'Model of the vehicle', required: true
   param :manufacture_year, String, desc: 'Manufacture year of the vehicle'
-  param :color, String, desc: 'Color of the vehicle'
   param :image_url, String, allow_nil: true, desc: 'URL of the vehicle image'
   param :plate_number, String, desc: 'License plate number of the vehicle'
   param :engine_number, String, desc: 'Engine number of the vehicle'
@@ -61,10 +58,8 @@ class API::VehiclesController < API::BaseController
   # API Endpoint: /api/vehicles/:id
   api :PATCH, '/vehicles/:id', 'Update an existing vehicle by ID'
   param :id, :number, required: true, desc: 'ID of the vehicle to update'
-  param :brand, String, desc: 'Brand of the vehicle'
   param :model, String, desc: 'Model of the vehicle'
   param :manufacture_year, String, desc: 'Manufacture year of the vehicle'
-  param :color, String, desc: 'Color of the vehicle'
   param :image_url, String, allow_nil: true, desc: 'URL of the vehicle image'
   param :plate_number, String, desc: 'License plate number of the vehicle'
   param :engine_number, String, desc: 'Engine number of the vehicle'
@@ -140,7 +135,7 @@ class API::VehiclesController < API::BaseController
   # Only allow a trusted parameter "white list" through for create action.
   def vehicle_params
     params.permit(
-      :brand, :model, :manufacture_year, :color, :image_url,
+      :model, :manufacture_year, :image_url,
       :plate_number, :engine_number, :fuel_type, :active
     )
   end

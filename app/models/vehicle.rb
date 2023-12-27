@@ -15,10 +15,7 @@ class Vehicle < ApplicationRecord
   has_one :driver, through: :active_assignment
 
   # validations
-  validates :brand,
-            :model,
-            :manufacture_year,
-            :color,
+  validates :manufacture_year,
             :plate_number,
             :engine_number,
             :fuel_type, presence: true
@@ -56,10 +53,7 @@ class Vehicle < ApplicationRecord
   AS_JSON_OPTS = {
     only: [
       :id,
-      :brand,
-      :model,
       :manufacture_year,
-      :color,
       :image_url,
       :plate_number,
       :engine_number,

@@ -23,10 +23,8 @@ POST https://mysite-h17z.onrender.com/team1/api/vehicles
 Content-Type: application/json
 
 {
-  "brand": "Gaz",
   "model": "AN-12",
   "manufacture_year": "2022-01-20",
-  "color": "red",
   "image_url": "http://example.com/gaz.png",
   "plate_number": "BV9123V",
   "engine_number": "1992312309GJAK1293",

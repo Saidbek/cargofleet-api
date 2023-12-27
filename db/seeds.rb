@@ -9,51 +9,48 @@ unless Account.any?
 end
 
 TEAMS.each do |team_name|
-  freight_trucks = {
-    "Volvo" => ["Volvo VNL Series", "Volvo VNR Series", "Volvo FH Series"],
-    "Peterbilt" => ["Peterbilt 579", "Peterbilt 389", "Peterbilt 567"],
-    "Kenworth" => ["Kenworth W900", "Kenworth T680", "Kenworth T880"],
-    "Freightliner" => ["Freightliner Cascadia", "Freightliner Coronado", "Freightliner M2"],
-    "Mack" => ["Mack Anthem", "Mack Pinnacle", "Mack Granite"],
-    "International" => ["International LoneStar", "International LT Series", "International HV Series"],
-    "Western Star" => ["Western Star 4900", "Western Star 5700XE", "Western Star 4700"],
-    "Scania" => ["Scania R Series", "Scania S Series", "Scania G Series"],
-    "MAN" => ["MAN TGX", "MAN TGS", "MAN TGM"],
-    "Isuzu" => ["Isuzu N-Series", "Isuzu F-Series", "Isuzu NPR"],
-    "Hino" => ["Hino 195", "Hino 338", "Hino 268"],
-    "Freightliner Custom Chassis" => ["Freightliner MT55", "Freightliner MT45", "Freightliner S2"],
-    "GMC" => ["GMC Sierra 2500HD", "GMC Sierra 3500HD", "GMC Savana"],
-    "Ram" => ["Ram ProMaster", "Ram ProMaster City", "Ram 2500"],
-    "Ford" => ["Ford Transit", "Ford Super Duty", "Ford F-650"],
-    "Chevrolet" => ["Chevrolet Silverado 2500HD", "Chevrolet Silverado 3500HD", "Chevrolet Express"],
-    "Nissan" => ["Nissan NV Cargo", "Nissan NV Passenger", "Nissan Titan XD"],
-    "Mercedes-Benz" => ["Mercedes-Benz Actros", "Mercedes-Benz Arocs", "Mercedes-Benz Econic"],
-    "Iveco" => ["Iveco Stralis", "Iveco Eurocargo", "Iveco Daily"],
-    "DAF" => ["DAF XF", "DAF CF", "DAF LF"],
-    "Volvo USA" => ["Volvo USA VHD", "Volvo USA VAH"],
-    "PACCAR" => ["PACCAR Kenworth W990", "PACCAR Peterbilt 367"],
-    "Fuso" => ["Fuso Canter", "Fuso Fighter"],
-    "Oshkosh" => ["Oshkosh Striker", "Oshkosh M-ATV"],
-    "Freightliner Australia" => ["Freightliner Australia Argosy", "Freightliner Australia Coronado SD"],
-    "UD" => ["UD Quon", "UD Quester"],
-    "TATA" => ["TATA Ultra", "TATA Signa"],
-    "Renault" => ["Renault T", "Renault K"],
-    "FAW" => ["FAW Jiefang J6", "FAW Jiefang J7"],
-    "Ashok Leyland" => ["Ashok Leyland Guru", "Ashok Leyland Captain"],
-    "Higer" => ["Higer KLQ6109GQE", "Higer KLQ6129Q"]
-  }
+  freight_trucks = [
+    ["Volvo VNL Series", "Volvo VNR Series", "Volvo FH Series"],
+    ["Peterbilt 579", "Peterbilt 389", "Peterbilt 567"],
+    ["Kenworth W900", "Kenworth T680", "Kenworth T880"],
+    ["Freightliner Cascadia", "Freightliner Coronado", "Freightliner M2"],
+    ["Mack Anthem", "Mack Pinnacle", "Mack Granite"],
+    ["International LoneStar", "International LT Series", "International HV Series"],
+    ["Western Star 4900", "Western Star 5700XE", "Western Star 4700"],
+    ["Scania R Series", "Scania S Series", "Scania G Series"],
+    ["MAN TGX", "MAN TGS", "MAN TGM"],
+    ["Isuzu N-Series", "Isuzu F-Series", "Isuzu NPR"],
+    ["Hino 195", "Hino 338", "Hino 268"],
+    ["Freightliner MT55", "Freightliner MT45", "Freightliner S2"],
+    ["GMC Sierra 2500HD", "GMC Sierra 3500HD", "GMC Savana"],
+    ["Ram ProMaster", "Ram ProMaster City", "Ram 2500"],
+    ["Ford Transit", "Ford Super Duty", "Ford F-650"],
+    ["Chevrolet Silverado 2500HD", "Chevrolet Silverado 3500HD", "Chevrolet Express"],
+    ["Nissan NV Cargo", "Nissan NV Passenger", "Nissan Titan XD"],
+    ["Mercedes-Benz Actros", "Mercedes-Benz Arocs", "Mercedes-Benz Econic"],
+    ["Iveco Stralis", "Iveco Eurocargo", "Iveco Daily"],
+    ["DAF XF", "DAF CF", "DAF LF"],
+    ["Volvo USA VHD", "Volvo USA VAH"],
+    ["PACCAR Kenworth W990", "PACCAR Peterbilt 367"],
+    ["Fuso Canter", "Fuso Fighter"],
+    ["Oshkosh Striker", "Oshkosh M-ATV"],
+    ["Freightliner Australia Argosy", "Freightliner Australia Coronado SD"],
+    ["UD Quon", "UD Quester"],
+    ["TATA Ultra", "TATA Signa"],
+    ["Renault T", "Renault K"],
+    ["FAW Jiefang J6", "FAW Jiefang J7"],
+    ["Ashok Leyland Guru", "Ashok Leyland Captain"],
+    ["Higer KLQ6109GQE", "Higer KLQ6129Q"]
+  ]
 
   ActsAsTenant.with_tenant(Account.find_by(name: team_name)) do
     unless Vehicle.any?
       # create vehicles
       500.times.map do
-        brand = freight_trucks.keys.sample
-        model = freight_trucks[brand].sample
+        model = freight_trucks.sample.sample
         vehicle_attrs = {
-          brand: brand,
           model: model,
           manufacture_year: Faker::Date.between(from: Date.today - 20.years, to: Date.today),
-          color: Faker::Color.color_name,
           plate_number: Faker::Alphanumeric.alpha(number: 8).upcase,
           engine_number: Faker::Alphanumeric.alphanumeric(number: 16, min_alpha: 1, min_numeric: 1).upcase,
           fuel_type: Vehicle.fuel_types.keys.sample,
