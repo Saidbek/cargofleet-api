@@ -1,6 +1,3 @@
-### get dashoard
-GET https://mysite-h17z.onrender.com/team1/api/dashboard
-
 ### get vehicles
 #GET https://mysite-h17z.onrender.com/team1/api/vehicles
 GET https://mysite-h17z.onrender.com/team1/api/vehicles

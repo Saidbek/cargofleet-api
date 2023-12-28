@@ -5,7 +5,6 @@ Rails.application.routes.draw do
 
   scope "/(:team_name)" do
     namespace :api do
-      resources :dashboard, only: [:index]
       resources :drivers do
         resources :trips do
           member do

@@ -13,18 +13,6 @@ class Issue < ApplicationRecord
             :due_date, presence: true
 
   # methods
-  def self.cached_open_count
-    # Rails.cache.fetch(Issue.last, expires_in: 1.minute) do
-      Issue.open_count
-    # end
-  end
-
-  def self.cached_overdue_count
-    # Rails.cache.fetch(Issue.last, expires_in: 1.minute) do
-      Issue.overdue_count
-    # end
-  end
-
   def as_json(options = {})
     super(AS_JSON_OPTS.merge(options))
   end

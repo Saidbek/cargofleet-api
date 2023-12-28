@@ -76,7 +76,7 @@ TEAMS.each do |team_name|
 
     unless Driver.any?
       # create driver
-      500.times.map do
+      100.times.map do
         first_name = Faker::Name.first_name
         last_name = Faker::Name.last_name
         driver_attrs = {

@@ -18,10 +18,6 @@ class Driver < ApplicationRecord
 
   # methods
 
-  def self.cached_archived_count
-    Driver.archived_count
-  end
-
   def as_json(options = {})
     super(AS_JSON_OPTS.merge(options))
   end

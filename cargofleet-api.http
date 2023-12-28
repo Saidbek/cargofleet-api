@@ -1,7 +1,3 @@
-### get dashoard
-GET http://localhost:3000/team3/api/dashboard
-
-
 ### ----------------------------------------------------------------- VEHICLES AND ISSUES
 ### get vehicles
 GET http://localhost:3000/team1/api/vehicles
