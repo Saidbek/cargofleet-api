@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_09_29_024910) do
+ActiveRecord::Schema.define(version: 2023_12_28_005514) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,22 +21,6 @@ ActiveRecord::Schema.define(version: 2023_09_29_024910) do
     t.string "domain"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "assignments", force: :cascade do |t|
-    t.bigint "driver_id", null: false
-    t.bigint "vehicle_id", null: false
-    t.datetime "start_date"
-    t.datetime "end_date"
-    t.string "start_odometer"
-    t.string "end_odometer"
-    t.string "start_comment"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.boolean "active", default: true
-    t.string "end_comment"
-    t.index ["driver_id"], name: "index_assignments_on_driver_id"
-    t.index ["vehicle_id"], name: "index_assignments_on_vehicle_id"
   end
 
   create_table "drivers", force: :cascade do |t|
@@ -53,18 +37,15 @@ ActiveRecord::Schema.define(version: 2023_09_29_024910) do
     t.string "country"
     t.string "license_number", null: false
     t.string "license_class"
-    t.string "license_state"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "account_id", null: false
-    t.boolean "active", default: true
     t.index ["account_id"], name: "index_drivers_on_account_id"
   end
 
   create_table "issues", force: :cascade do |t|
     t.bigint "vehicle_id", null: false
-    t.string "title", null: false
-    t.text "description"
+    t.text "description", null: false
     t.integer "priority", null: false
     t.datetime "due_date", null: false
     t.datetime "created_at", null: false
@@ -74,11 +55,25 @@ ActiveRecord::Schema.define(version: 2023_09_29_024910) do
     t.index ["vehicle_id"], name: "index_issues_on_vehicle_id"
   end
 
+  create_table "trips", force: :cascade do |t|
+    t.bigint "driver_id", null: false
+    t.bigint "vehicle_id", null: false
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "departure_location"
+    t.string "arrival_location"
+    t.string "distance"
+    t.string "duration"
+    t.boolean "completed", default: false
+    t.index ["driver_id"], name: "index_trips_on_driver_id"
+    t.index ["vehicle_id"], name: "index_trips_on_vehicle_id"
+  end
+
   create_table "vehicles", force: :cascade do |t|
-    t.string "brand", null: false
     t.string "model", null: false
     t.date "manufacture_year", null: false
-    t.string "color", null: false
     t.string "image_url"
     t.string "plate_number", null: false
     t.string "engine_number", null: false
@@ -90,7 +85,7 @@ ActiveRecord::Schema.define(version: 2023_09_29_024910) do
     t.index ["account_id"], name: "index_vehicles_on_account_id"
   end
 
-  add_foreign_key "assignments", "drivers"
-  add_foreign_key "assignments", "vehicles"
   add_foreign_key "issues", "vehicles"
+  add_foreign_key "trips", "drivers"
+  add_foreign_key "trips", "vehicles"
 end

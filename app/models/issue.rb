@@ -9,8 +9,7 @@ class Issue < ApplicationRecord
   belongs_to :vehicle
 
   # validations
-  validates :title,
-            :priority,
+  validates :priority,
             :due_date, presence: true
 
   # methods
@@ -34,7 +33,6 @@ class Issue < ApplicationRecord
     only: [
       :id,
       :vehicle_id,
-      :title,
       :description,
       :priority,
       :due_date,

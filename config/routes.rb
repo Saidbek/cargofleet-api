@@ -8,12 +8,9 @@ Rails.application.routes.draw do
       resources :dashboard, only: [:index]
       resources :drivers
       resources :vehicles do
-        member do
-          post :assign
-          post :unassign
-        end
+        resources :issues
+        resources :trips
       end
-      resources :issues
     end
   end
 end

@@ -3,14 +3,14 @@ class API::IssuesController < API::BaseController
 
   # API Endpoint: /api/issues
   api :GET, '/issues', 'Retrieve a list of issues'
-  param :title, String, desc: 'Filter by issue title (optional)'
+  param :description, String, desc: 'Filter by issue description (optional)'
   param :page, String, desc: 'Page number for pagination (optional)'
   param :per_page, String, desc: 'Number of records per page (optional)'
 
-  # Description: This endpoint retrieves a paginated list of issues, optionally filtered by title.
+  # Description: This endpoint retrieves a paginated list of issues, optionally filtered by description.
   def index
     @issues = Issue.includes(:vehicle)
-    @issues = sort_and_filter(@issues, filter_columns: [:title])
+    @issues = sort_and_filter(@issues, filter_columns: [:description])
     @issues = paginate_query(@issues, params)
 
     # Response:
@@ -31,8 +31,7 @@ class API::IssuesController < API::BaseController
   # API Endpoint: /api/issues
   api :POST, '/issues', 'Create a new issue'
   param :vehicle_id, :number, desc: 'ID of the associated vehicle'
-  param :title, String, desc: 'Title of the issue'
-  param :description, String, allow_nil: true, desc: 'Description of the issue'
+  param :description, String, desc: 'Description of the issue'
   param :priority, String, desc: 'Priority of the issue'
   param :due_date, String, desc: 'Due date of the issue'
 
@@ -56,8 +55,7 @@ class API::IssuesController < API::BaseController
   # API Endpoint: /api/issues/:id
   api :PATCH, '/issues/:id', 'Update an existing issue by ID'
   param :id, :number, required: true, desc: 'ID of the issue to update'
-  param :title, String, desc: 'Title of the issue'
-  param :description, String, allow_nil: true, desc: 'Description of the issue'
+  param :description, String, desc: 'Description of the issue'
   param :priority, String, desc: 'Priority of the issue'
   param :due_date, String, desc: 'Due date of the issue'
 

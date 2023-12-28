@@ -92,40 +92,6 @@ class API::VehiclesController < API::BaseController
   param :start_odometer, String, desc: 'Odometer reading at the start of assignment'
   param :start_comment, String, desc: 'Comment for the assignment start'
 
-  # Description: This endpoint assigns a vehicle to a driver.
-  def assign
-    @assignment = @vehicle.assignments.build(assignment_params.merge(active: true))
-    if @assignment.save
-      # Response:
-      #   - Content-Type: application/json
-      #   - Body: JSON object representing the created assignment
-      render json: @assignment, status: :created
-    else
-      # Response:
-      #   - Content-Type: application/json
-      #   - Body: JSON object containing validation errors
-      render json: @assignment.errors, status: :unprocessable_entity
-    end
-  end
-
-  # API Endpoint: /api/vehicles/:id/unassign
-  api :POST, '/vehicles/:id/unassign', 'Unassign a vehicle from a driver'
-  param :id, :number, required: true, desc: 'ID of the vehicle to unassign'
-  param :assignment_id, :number, desc: 'ID of the assignment to unassign', required: true
-  param :end_odometer, String, desc: 'Odometer reading at the end of assignment'
-  param :end_date, String, desc: 'Date of assignment end'
-  param :end_comment, String, desc: 'Comment for the assignment end'
-
-  # Description: This endpoint unassigns a vehicle from a driver.
-  def unassign
-    @assignment = @vehicle.assignments.find(params[:assignment_id])
-    if @assignment.update(unassignment_params.merge(active: false))
-      render json: @assignment
-    else
-      render json: @assignment.errors, status: :unprocessable_entity
-    end
-  end
-
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_vehicle

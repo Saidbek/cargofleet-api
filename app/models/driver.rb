@@ -1,14 +1,9 @@
 class Driver < ApplicationRecord
   acts_as_tenant :account
 
-  scope :active_count, -> { where(active: true).count }
-  scope :archived_count, -> { where(active: false).count }
-
   # associations
-  has_many :assignments, dependent: :destroy
-  has_many :vehicles, through: :assignments, dependent: :destroy
-  has_one :active_assignment, -> { where(active: true) }, class_name: 'Assignment', dependent: :destroy
-  has_one :vehicle, through: :active_assignment, dependent: :destroy
+  has_many :trips, dependent: :destroy
+  has_many :vehicles, through: :trips, dependent: :destroy
 
   # validations
   validates :first_name,
@@ -19,14 +14,10 @@ class Driver < ApplicationRecord
             :city,
             :state,
             :postal_code,
-            :license_number, presence: true
+            :license_number,
+            :account_id, presence: true
 
   # methods
-  def self.cached_active_count
-    # Rails.cache.fetch(Driver.last, expires_in: 1.minute) do
-      Driver.active_count
-    # end
-  end
 
   def self.cached_archived_count
     # Rails.cache.fetch(Driver.last, expires_in: 1.minute) do
@@ -54,7 +45,6 @@ class Driver < ApplicationRecord
       :country,
       :license_number,
       :license_class,
-      :license_state,
       :created_at,
       :updated_at
     ],

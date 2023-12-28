@@ -46,8 +46,6 @@ class API::DriversController < API::BaseController
   param :country, String, allow_nil: true, desc: 'Country of residence of the driver'
   param :license_number, String, desc: 'Driver\'s license number'
   param :license_class, String, allow_nil: true, desc: 'Driver\'s license class'
-  param :license_state, String, allow_nil: true, desc: 'State or province of driver\'s license issuance'
-  param :active, [true, false], desc: 'Indicates whether the driver is active'
 
   # Description: This endpoint creates a new driver.
   def create
@@ -84,8 +82,6 @@ class API::DriversController < API::BaseController
   param :country, String, allow_nil: true, desc: 'Country of residence of the driver'
   param :license_number, String, desc: 'Driver\'s license number'
   param :license_class, String, allow_nil: true, desc: 'Driver\'s license class'
-  param :license_state, String, allow_nil: true, desc: 'State or province of driver\'s license issuance'
-  param :active, [true, false], desc: 'Indicates whether the driver is active'
 
   # Description: This endpoint updates an existing driver by ID.
   def update
@@ -113,6 +109,6 @@ class API::DriversController < API::BaseController
 
   # Only allow a trusted parameter "white list" through.
   def driver_params
-    params.permit(:first_name, :last_name, :birth_date, :email, :phone_number, :address1, :address2, :city, :state, :postal_code, :country, :license_number, :license_class, :license_state, :active)
+    params.permit(:first_name, :last_name, :birth_date, :email, :phone_number, :address1, :address2, :city, :state, :postal_code, :country, :license_number, :license_class)
   end
 end

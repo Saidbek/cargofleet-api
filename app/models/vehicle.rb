@@ -2,17 +2,17 @@ class Vehicle < ApplicationRecord
   acts_as_tenant :account
 
   enum fuel_type: [:diesel, :gasoline, :propane, :natural_gas]
-  scope :assigned_count, -> { left_joins(:assignments).where(assignments: { driver_id: nil }).count }
-  scope :unassigned_count, -> { left_joins(:assignments).where.not(assignments: { driver_id: nil }).count }
+  scope :assigned_count, -> { left_joins(:trips).where(trips: { driver_id: nil }).count }
+  scope :unassigned_count, -> { left_joins(:trips).where.not(trips: { driver_id: nil }).count }
   scope :active_count, -> { where(active: true).count }
   scope :archived_count, -> { where(active: false).count }
 
   # associations
   has_many :issues, dependent: :destroy
-  has_many :assignments, dependent: :destroy
-  has_many :drivers, through: :assignments
-  has_one :active_assignment, -> { where(active: true) }, class_name: 'Assignment'
-  has_one :driver, through: :active_assignment
+  has_many :trips, dependent: :destroy
+  has_many :drivers, through: :trips
+  has_one :active_trip, -> { where(active: true) }, class_name: 'Trip'
+  has_one :driver, through: :active_trip
 
   # validations
   validates :manufacture_year,
@@ -62,6 +62,6 @@ class Vehicle < ApplicationRecord
       :updated_at,
       :active
     ],
-    include: [:driver, :active_assignment],
+    include: [:driver, :active_trip],
   }.freeze
 end
