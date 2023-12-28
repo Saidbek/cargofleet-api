@@ -26,7 +26,7 @@ module SortAndFilter
     controller_name.classify.constantize
   end
 
-  def sort_and_filter(records, filter_columns: [:title])
+  def sort_and_filter(records, filter_columns: [])
     filter_keys = filter_columns.join(' LIKE ? OR ').concat(' LIKE ?')
     filter_values = filter_columns.length.times.map { "%#{filter}%" }
 

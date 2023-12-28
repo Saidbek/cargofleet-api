@@ -1,17 +1,13 @@
 ### get dashoard
 GET http://localhost:3000/team3/api/dashboard
 
+
+### ----------------------------------------------------------------- VEHICLES AND ISSUES
 ### get vehicles
 GET http://localhost:3000/team1/api/vehicles
 
 ### get vehicles sort
 GET http://localhost:3000/team1/api/vehicles?sort=model&direction=asc
-
-### get issues
-GET http://localhost:3000/team1/api/issues?filter=Ratione
-
-### get drivers
-GET http://localhost:3000/team1/api/drivers?direction=asc
 
 ### delete a vehicle
 GET http://localhost:3000/team1/api/vehicles/61
@@ -28,25 +24,47 @@ Content-Type: application/json
   "fuel_type": "diesel"
 }
 
-### create issue
-POST http://localhost:3000/team1/api/issues
+### update vehicle
+PUT http://localhost:3000/team1/api/vehicles/100
 Content-Type: application/json
 
 {
-  "vehicle_id": "9",
-  "title": "Change oil",
-  "description":  "Go ahead and change immediately",
-  "priority": "high",
-  "due_date":  "2023-01-29"
+  "model": "AN-12345",
+  "manufacture_year": "2022-01-20",
+  "plate_number": "BV9123V",
+  "engine_number": "1992312309GJAK1293",
+  "fuel_type": "gasoline"
 }
+
+### create a new issue for a vehicle
+POST http://localhost:3000/team1/api/vehicles/100/issues
+Content-Type: application/json
+
+{
+  "description":  "Change brakes",
+  "priority": "low",
+  "due_date":  "2023-12-31"
+}
+
+### Delete an issue
+DELETE http://localhost:3000/team1/api/vehicles/100/issues/501
+
+### ----------------------------------------------------------------- VEHICLES AND ISSUES
+
+
+
+
+### ----------------------------------------------------------------- DRIVERS AND TRIPS
+### get drivers
+GET http://localhost:3000/team1/api/drivers
 
 ### create driver
 POST http://localhost:3000/team1/api/drivers
 Content-Type: application/json
 
 {
-  "first_name": null,
-  "last_name": "Fagaro",
+  "first_name": "Ales",
+  "last_name": "Jones",
   "birth_date": "1985-01-15",
   "email": "tom@figaro.com",
   "phone_number": "+14372394298",
@@ -62,12 +80,12 @@ Content-Type: application/json
 }
 
 ### update driver
-PUT http://localhost:3000/team1/api/drivers/253
+PUT http://localhost:3000/team1/api/drivers/2501
 Content-Type: application/json
 
 {
-  "first_name": "Tom",
-  "last_name": "Fagaro",
+  "first_name": "Alex",
+  "last_name": "Jones",
   "birth_date": "1985-01-15",
   "email": "tom@figaro.com",
   "phone_number": "+14372394298",
@@ -82,18 +100,43 @@ Content-Type: application/json
   "license_state": "BC"
 }
 
-### create assignment
-POST http://localhost:3000/team1/api/vehicles/201/assign
+### get driver's trips
+GET http://localhost:3000/team1/api/drivers/2501/trips
+
+### create a new trip
+POST http://localhost:3000/team1/api/drivers/2501/trips
 Content-Type: application/json
 
 {
-  "assignment": {
-    "driver_id": "201",
-    "start_date": "2023-01-02",
-    "start_odometer": "100",
-    "start_comment": "Have a safe way!"
-  }
+  "vehicle_id": "99",
+  "departure_location": "Chicago",
+  "arrival_location": "New York",
+  "start_date": "2023-12-15",
+  "end_date": "2023-12-20",
+  "distance": "1000 miles",
+  "duration": "25 hours"
 }
+
+### complete a trip
+PUT http://localhost:3000/team1/api/drivers/2501/trips/101/complete
+Content-Type: application/json
+
+### ----------------------------------------------------------------- DRIVERS
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ### create unassignment
 POST http://localhost:3000/team1/api/vehicles/201/unassign

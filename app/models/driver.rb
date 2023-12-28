@@ -3,7 +3,6 @@ class Driver < ApplicationRecord
 
   # associations
   has_many :trips, dependent: :destroy
-  has_many :vehicles, through: :trips, dependent: :destroy
 
   # validations
   validates :first_name,
@@ -20,9 +19,7 @@ class Driver < ApplicationRecord
   # methods
 
   def self.cached_archived_count
-    # Rails.cache.fetch(Driver.last, expires_in: 1.minute) do
-      Driver.archived_count
-    # end
+    Driver.archived_count
   end
 
   def as_json(options = {})
@@ -48,6 +45,6 @@ class Driver < ApplicationRecord
       :created_at,
       :updated_at
     ],
-    include: [:vehicle]
+    include: [:trips]
   }.freeze
 end

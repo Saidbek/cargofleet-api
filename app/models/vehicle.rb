@@ -2,17 +2,13 @@ class Vehicle < ApplicationRecord
   acts_as_tenant :account
 
   enum fuel_type: [:diesel, :gasoline, :propane, :natural_gas]
-  scope :assigned_count, -> { left_joins(:trips).where(trips: { driver_id: nil }).count }
-  scope :unassigned_count, -> { left_joins(:trips).where.not(trips: { driver_id: nil }).count }
+  # scope :assigned_count, -> { left_joins(:trips).where(trips: { driver_id: nil }).count }
+  # scope :unassigned_count, -> { left_joins(:trips).where.not(trips: { driver_id: nil }).count }
   scope :active_count, -> { where(active: true).count }
   scope :archived_count, -> { where(active: false).count }
 
   # associations
   has_many :issues, dependent: :destroy
-  has_many :trips, dependent: :destroy
-  has_many :drivers, through: :trips
-  has_one :active_trip, -> { where(active: true) }, class_name: 'Trip'
-  has_one :driver, through: :active_trip
 
   # validations
   validates :manufacture_year,
@@ -53,6 +49,7 @@ class Vehicle < ApplicationRecord
   AS_JSON_OPTS = {
     only: [
       :id,
+      :model,
       :manufacture_year,
       :image_url,
       :plate_number,
@@ -62,6 +59,6 @@ class Vehicle < ApplicationRecord
       :updated_at,
       :active
     ],
-    include: [:driver, :active_trip],
+    include: [:issues]
   }.freeze
 end
