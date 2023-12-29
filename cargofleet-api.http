@@ -71,8 +71,7 @@ Content-Type: application/json
   "postal_code": "V3J0K5",
   "country": "Canada",
   "license_number": "BV01291",
-  "license_class": "5",
-  "license_state": "BC"
+  "license_class": "5"
 }
 
 ### update driver
@@ -93,7 +92,6 @@ Content-Type: application/json
   "country": "Canada",
   "license_number": "BV01291",
   "license_class": "5",
-  "license_state": "BC"
 }
 
 ### get driver's trips
