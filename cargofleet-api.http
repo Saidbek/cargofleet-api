@@ -1,9 +1,11 @@
 ### ----------------------------------------------------------------- VEHICLES AND ISSUES
 ### get vehicles
 GET http://localhost:3000/team1/api/vehicles
+Authorization: Zb84MzAROCrhmF6t
 
 ### get vehicles sort
 GET http://localhost:3000/team1/api/vehicles?sort=model&direction=asc
+Authorization: Zb84MzAROCrhmF6t
 
 ### delete a vehicle
 GET http://localhost:3000/team1/api/vehicles/61
