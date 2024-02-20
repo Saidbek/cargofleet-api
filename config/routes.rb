@@ -8,12 +8,14 @@ Rails.application.routes.draw do
       resources :drivers do
         resources :trips do
           member do
-            put :complete
+            patch :complete
           end
         end
       end
       resources :vehicles do
-        resources :issues
+        resources :issues do
+          patch :complete
+        end
       end
     end
   end

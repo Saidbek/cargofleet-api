@@ -1,4 +1,16 @@
 class API::TripsController < API::BaseController
+  api :GET, '/trips', 'Retrieve a list of trips'
+  param :page, String, desc: 'Page number for pagination (optional)'
+  param :per_page, String, desc: 'Number of records per page (optional)'
+
+  def index
+    @driver = Driver.find(params[:driver_id])
+    @trips = @driver.trips
+    @trips = paginate_query(@trips, params)
+
+    render_paginated_response @trips
+  end
+
   api :POST, '/api/drivers/:driver_id/trips', "Create a new driver's trip"
   param :driver_id, :number, desc: 'ID of the associated driver'
   param :vehicle_id, :number, desc: 'ID of the associated vehicle'
@@ -19,13 +31,13 @@ class API::TripsController < API::BaseController
     end
   end
 
-  api :PUT, '/api/drivers/:driver_id/trips/:id/complete', "Complete a driver's trip"
+  api :PATCH, '/api/drivers/:driver_id/trips/:id/complete', "Complete a driver's trip"
   param :driver_id, :number, desc: 'ID of the associated driver'
   param :id, :number, desc: 'ID of the associated trip'
   def complete
     @driver = Driver.find(params[:driver_id])
     @trip = @driver.trips.find(params[:id])
-    if @trip.complete
+    if @trip.update(completed: true)
       render json: @trip, status: :no_content
     else
       render json: @trip.errors, status: :unprocessable_entity

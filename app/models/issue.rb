@@ -24,6 +24,7 @@ class Issue < ApplicationRecord
       :description,
       :priority,
       :due_date,
+      :completed,
       :created_at,
       :updated_at
     ],

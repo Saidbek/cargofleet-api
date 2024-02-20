@@ -1,27 +1,30 @@
 ### get vehicles
-#GET https://mysite-h17z.onrender.com/team1/api/vehicles
-GET https://mysite-h17z.onrender.com/team1/api/vehicles
+#GET https://cargofleet-api.fly.dev/team1/api/vehicles
+GET https://cargofleet-api.fly.dev/team1/api/vehicles
+Authorization: Zb84MzAROCrhmF6t
 
 ### delete a vehicle
-DELETE https://mysite-h17z.onrender.com/team1/api/vehicles/2008
+DELETE https://cargofleet-api.fly.dev/team1/api/vehicles/2008
 
 ### get vehicles sort
-GET https://mysite-h17z.onrender.com/team1/api/vehicles?sort=model&direction=asc
+GET https://cargofleet-api.fly.dev/team1/api/vehicles?sort=model&direction=asc
 
 ### get drivers
-GET https://mysite-h17z.onrender.com/team1/api/drivers/
+GET https://cargofleet-api.fly.dev/team1/api/drivers/
+Authorization: Zb84MzAROCrhmF6t
 
 ### update vehicle
-PUT https://mysite-h17z.onrender.com/team1/api/vehicles/
+PUT https://cargofleet-api.fly.dev/team1/api/vehicles/
 Content-Type: application/json
 
 ### create vehicle
-POST https://mysite-h17z.onrender.com/team1/api/vehicles
+POST https://cargofleet-api.fly.dev/team1/api/vehicles
 Content-Type: application/json
+Authorization: Zb84MzAROCrhmF6t
 
 {
   "model": "AN-12",
-  "manufacture_year": "2022-01-20",
+  "manufacture_year": "2022",
   "image_url": "http://example.com/gaz.png",
   "plate_number": "BV9123V",
   "engine_number": "1992312309GJAK1293",
@@ -30,10 +33,10 @@ Content-Type: application/json
 }
 
 ### get issues
-GET https://mysite-h17z.onrender.com/team1/api/issues
+GET https://cargofleet-api.fly.dev/team1/api/issues
 
 ### create issue
-POST https://mysite-h17z.onrender.com/team1/api/issues
+POST https://cargofleet-api.fly.dev/team1/api/issues
 Content-Type: application/json
 
 {
@@ -45,7 +48,7 @@ Content-Type: application/json
 }
 
 ### update issue
-PUT https://mysite-h17z.onrender.com/team1/api/issues/31
+PUT https://cargofleet-api.fly.dev/team1/api/issues/31
 Content-Type: application/json
 
 {
@@ -57,7 +60,7 @@ Content-Type: application/json
 }
 
 ### create driver
-POST https://mysite-h17z.onrender.com/team1/api/drivers
+POST https://cargofleet-api.fly.dev/team1/api/drivers
 Content-Type: application/json
 
 {
@@ -80,7 +83,7 @@ Content-Type: application/json
 ### driver id: 516
 
 ### create assignment
-POST https://mysite-h17z.onrender.com/team1/api/vehicles/404/assign
+POST https://cargofleet-api.fly.dev/team1/api/vehicles/404/assign
 Content-Type: application/json
 
 {
@@ -91,7 +94,7 @@ Content-Type: application/json
 }
 
 ### create unassignment
-POST https://mysite-h17z.onrender.com/team1/api/vehicles/404/unassign
+POST https://cargofleet-api.fly.dev/team1/api/vehicles/404/unassign
 Content-Type: application/json
 
 {
