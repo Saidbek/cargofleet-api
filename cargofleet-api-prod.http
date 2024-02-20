@@ -1,21 +1,29 @@
+#### ---------------------------- VEHICLES START ----------------------------
+
 ### get vehicles
-#GET https://cargofleet-api.fly.dev/team1/api/vehicles
 GET https://cargofleet-api.fly.dev/team1/api/vehicles
 Authorization: Zb84MzAROCrhmF6t
 
-### delete a vehicle
-DELETE https://cargofleet-api.fly.dev/team1/api/vehicles/2008
-
 ### get vehicles sort
 GET https://cargofleet-api.fly.dev/team1/api/vehicles?sort=model&direction=asc
+Authorization: Zb84MzAROCrhmF6t
 
-### get drivers
-GET https://cargofleet-api.fly.dev/team1/api/drivers/
+### get vehicles
+GET https://cargofleet-api.fly.dev/team1/api/vehicles/100
+Authorization: Zb84MzAROCrhmF6t
+
+### delete a vehicle
+DELETE https://cargofleet-api.fly.dev/team1/api/vehicles/100
 Authorization: Zb84MzAROCrhmF6t
 
 ### update vehicle
-PUT https://cargofleet-api.fly.dev/team1/api/vehicles/
+PUT https://cargofleet-api.fly.dev/team1/api/vehicles/99
 Content-Type: application/json
+Authorization: Zb84MzAROCrhmF6t
+
+{
+  "model": "Kenworth T680"
+}
 
 ### create vehicle
 POST https://cargofleet-api.fly.dev/team1/api/vehicles
@@ -24,7 +32,7 @@ Authorization: Zb84MzAROCrhmF6t
 
 {
   "model": "AN-12",
-  "manufacture_year": "2022",
+  "manufacture_year": "1997-01-20",
   "image_url": "http://example.com/gaz.png",
   "plate_number": "BV9123V",
   "engine_number": "1992312309GJAK1293",
@@ -32,36 +40,47 @@ Authorization: Zb84MzAROCrhmF6t
   "active": true
 }
 
+#### ---------------------------- VEHICLES END ----------------------------
+
+#### ---------------------------- ISSUES START ----------------------------
+
 ### get issues
-GET https://cargofleet-api.fly.dev/team1/api/issues
+GET https://cargofleet-api.fly.dev/team1/api/vehicles/538/issues
+Authorization: Zb84MzAROCrhmF6t
 
 ### create issue
-POST https://cargofleet-api.fly.dev/team1/api/issues
+POST https://cargofleet-api.fly.dev/team1/api/vehicles/538/issues
 Content-Type: application/json
+Authorization: Zb84MzAROCrhmF6t
 
 {
-  "vehicle_id": "64",
-  "title": "Change oil",
-  "description":  "Go ahead and change immediately",
+  "title": "Change brakes",
+  "description":  "Need to replace brakes",
   "priority": "high",
-  "due_date":  "2023-01-29"
+  "due_date":  "2024-04-30"
 }
 
-### update issue
-PUT https://cargofleet-api.fly.dev/team1/api/issues/31
+### complete issue
+PATCH https://cargofleet-api.fly.dev/team1/api/vehicles/538/issues/507/complete
 Content-Type: application/json
+Authorization: Zb84MzAROCrhmF6t
 
-{
-  "vehicle_id": "39",
-  "title": "Change oil",
-  "description":  "Go ahead and change immediately",
-  "priority": "high",
-  "due_date":  "2023-01-29"
-}
+#### ---------------------------- ISSUES END ----------------------------
+
+#### ---------------------------- DRIVERS START ----------------------------
+
+### get drivers
+GET https://cargofleet-api.fly.dev/team1/api/drivers/
+Authorization: Zb84MzAROCrhmF6t
+
+### show a driver
+GET https://cargofleet-api.fly.dev/team1/api/drivers/100
+Authorization: Zb84MzAROCrhmF6t
 
 ### create driver
 POST https://cargofleet-api.fly.dev/team1/api/drivers
 Content-Type: application/json
+Authorization: Zb84MzAROCrhmF6t
 
 {
   "first_name": "Tom",
@@ -80,26 +99,46 @@ Content-Type: application/json
   "license_state": "BC"
 }
 
-### driver id: 516
-
-### create assignment
-POST https://cargofleet-api.fly.dev/team1/api/vehicles/404/assign
+### update a driver
+PUT https://cargofleet-api.fly.dev/team1/api/drivers/601
 Content-Type: application/json
+Authorization: Zb84MzAROCrhmF6t
 
 {
-    "driver_id": "251",
-    "start_date": "2023-01-02",
-    "start_odometer": "100",
-    "start_comment": "Have a safe way!"
+  "last_name": "Figaro"
 }
 
-### create unassignment
-POST https://cargofleet-api.fly.dev/team1/api/vehicles/404/unassign
+### destroy a driver
+DELETE https://cargofleet-api.fly.dev/team1/api/drivers/601
 Content-Type: application/json
+Authorization: Zb84MzAROCrhmF6t
+
+#### ---------------------------- DRIVERS END ----------------------------
+
+#### ---------------------------- TRIPS START ----------------------------
+
+### get trips
+GET https://cargofleet-api.fly.dev/team1/api/drivers/100/trips
+Authorization: Zb84MzAROCrhmF6t
+
+### create a trip
+POST https://cargofleet-api.fly.dev/team1/api/drivers/100/trips
+Content-Type: application/json
+Authorization: Zb84MzAROCrhmF6t
 
 {
-  "assignment_id": "20",
-  "end_odometer": "200",
-  "end_date":  "2023-10-10",
-  "end_comment": "Finish it!"
+  "vehicle_id": 83,
+  "departure_location": "Vancouver",
+  "arrival_location": "Seattle",
+  "start_date": "2023-02-10",
+  "end_date": "2023-02-12",
+  "distance": "500",
+  "duration": "10"
 }
+
+
+### complete a trip
+PATCH https://cargofleet-api.fly.dev/team1/api/drivers/100/trips/101/complete
+Authorization: Zb84MzAROCrhmF6t
+
+#### ---------------------------- TRIPS END ----------------------------
