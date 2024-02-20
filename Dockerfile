@@ -16,8 +16,7 @@ ENV RAILS_ENV="production" \
 
 # Update gems and preinstall the desired version of bundler
 ARG BUNDLER_VERSION=2.2.19
-RUN gem update --system --no-document && \
-    gem install -N bundler -v ${BUNDLER_VERSION}
+RUN gem install -N bundler -v ${BUNDLER_VERSION}
 
 
 # Throw-away build stage to reduce size of final image
