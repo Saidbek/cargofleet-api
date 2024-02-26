@@ -11,7 +11,7 @@ class API::TripsController < API::BaseController
     render_paginated_response @trips
   end
 
-  api :POST, '/api/drivers/:driver_id/trips', "Create a new driver's trip"
+  api :POST, 'drivers/:driver_id/trips', "Create a new driver's trip"
   param :driver_id, :number, desc: 'ID of the associated driver'
   param :vehicle_id, :number, desc: 'ID of the associated vehicle'
   param :departure_location, String, desc: 'The departure location'
@@ -31,7 +31,7 @@ class API::TripsController < API::BaseController
     end
   end
 
-  api :PATCH, '/api/drivers/:driver_id/trips/:id/complete', "Complete a driver's trip"
+  api :PATCH, '/drivers/:driver_id/trips/:id/complete', "Complete a driver's trip"
   param :driver_id, :number, desc: 'ID of the associated driver'
   param :id, :number, desc: 'ID of the associated trip'
   def complete

@@ -13,7 +13,7 @@ class API::IssuesController < API::BaseController
     render_paginated_response @issues
   end
 
-  api :POST, '/api/vehicles/:vehicle_id/issues', "Create a new vehicle's issue"
+  api :POST, '/vehicles/:vehicle_id/issues', "Create a new vehicle's issue"
   param :vehicle_id, :number, desc: 'ID of the associated vehicle'
   param :description, String, desc: 'Description of the issue'
   param :priority, String, desc: 'Priority of the issue'
@@ -39,7 +39,7 @@ class API::IssuesController < API::BaseController
     @issue.destroy
   end
 
-  api :PATCH, '/api/drivers/:vehicle_id/issues/:id/complete', "Complete an issue"
+  api :PATCH, '/vehicles/:vehicle_id/issues/:id/complete', "Complete an issue"
   param :vehicle, :number, desc: 'ID of the associated vehicle'
   param :id, :number, desc: 'ID of the associated issue'
   def complete
