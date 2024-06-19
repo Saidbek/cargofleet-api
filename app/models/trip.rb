@@ -4,6 +4,10 @@ class Trip < ApplicationRecord
 
   validates :driver, :vehicle, presence: true
 
+  scope :completed_count, -> { where(completed: true).count }
+  scope :ongoing_count, -> { where(completed: false).count }
+  scope :last_30_days_count, -> { where('start_date >= ?', 30.days.ago).count }
+
   # methods
   def as_json(options = {})
     super(AS_JSON_OPTS.merge(options))

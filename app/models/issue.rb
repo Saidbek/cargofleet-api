@@ -2,8 +2,9 @@ class Issue < ApplicationRecord
   acts_as_tenant :account
 
   enum priority: [:low, :medium, :high]
-  scope :overdue_count, -> { where('due_date < ?', Date.today).count }
-  scope :open_count, -> { where('due_date >= ?', Date.today).count }
+  scope :open_count, -> { where(completed: false).count }
+  scope :completed_count, -> { where(completed: true).count }
+  scope :overdue_count, -> { where('due_date < ? AND completed = ?', Date.today, false).count }
 
   # associations
   belongs_to :vehicle

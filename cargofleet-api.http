@@ -1,3 +1,8 @@
+### ----------------------------------------------------------------- DASHBOARD
+### get dashboard data
+GET http://localhost:3000/team1/api/dashboard
+Authorization: Zb84MzAROCrhmF6t
+
 ### ----------------------------------------------------------------- VEHICLES AND ISSUES
 ### get vehicles
 GET http://localhost:3000/team1/api/vehicles

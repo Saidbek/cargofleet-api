@@ -2,10 +2,8 @@ class Vehicle < ApplicationRecord
   acts_as_tenant :account
 
   enum fuel_type: [:diesel, :gasoline, :propane, :natural_gas]
-  # scope :assigned_count, -> { left_joins(:trips).where(trips: { driver_id: nil }).count }
-  # scope :unassigned_count, -> { left_joins(:trips).where.not(trips: { driver_id: nil }).count }
   scope :active_count, -> { where(active: true).count }
-  scope :archived_count, -> { where(active: false).count }
+  scope :inactive_count, -> { where(active: false).count }
 
   # associations
   has_many :issues, dependent: :destroy
@@ -17,6 +15,14 @@ class Vehicle < ApplicationRecord
             :fuel_type, presence: true
 
   # methods
+
+  def self.assigned_count
+    Trip.select(:vehicle_id).distinct.count
+  end
+
+  def self.unassigned_count
+    Vehicle.count - self.assigned_count
+  end
 
   def as_json(options = {})
     super(AS_JSON_OPTS.merge(options))

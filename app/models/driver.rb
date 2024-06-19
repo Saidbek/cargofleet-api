@@ -18,6 +18,16 @@ class Driver < ApplicationRecord
 
   # methods
 
+  # "active" driver is one who has at least one trip assigned
+  def self.active_count
+    joins(:trips).distinct.count
+  end
+
+  # "inactive" driver is one who has no trips assigned.
+  def self.inactive_count
+    Driver.count - self.active_count
+  end
+
   def as_json(options = {})
     super(AS_JSON_OPTS.merge(options))
   end
