@@ -41,7 +41,7 @@ class API::DashboardController < API::BaseController
         assigned: Vehicle.assigned_count,
         unassigned: Vehicle.unassigned_count,
         active: Vehicle.active_count,
-        archived: Vehicle.inactive_count
+        inactive: Vehicle.inactive_count
       },
       issues: {
         total: Issue.count,

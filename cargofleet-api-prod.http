@@ -1,3 +1,9 @@
+#### ---------------------------- DASHBOARD START ----------------------------
+
+### get dashboard data
+GET https://cargofleet-api.fly.dev/team1/api/dashboard
+Authorization: Zb84MzAROCrhmF6t
+
 #### ---------------------------- VEHICLES START ----------------------------
 
 ### get vehicles
