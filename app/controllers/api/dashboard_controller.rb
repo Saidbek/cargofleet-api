@@ -32,28 +32,24 @@ class API::DashboardController < API::BaseController
   def index
     render json: {
       drivers: {
-        total: Driver.count,
         active: Driver.active_count,
         inactive: Driver.inactive_count
       },
       vehicles: {
-        total: Vehicle.count,
         assigned: Vehicle.assigned_count,
         unassigned: Vehicle.unassigned_count,
         active: Vehicle.active_count,
         inactive: Vehicle.inactive_count
       },
       issues: {
-        total: Issue.count,
         open: Issue.open_count,
-        completed: Issue.completed_count,
         overdue: Issue.overdue_count
       },
       trips: {
-        total: Trip.count,
         completed: Trip.completed_count,
         ongoing: Trip.ongoing_count,
-        last_30_days: Trip.last_30_days_count
+        last_30_days: Trip.last_30_days_count,
+        monthly_completed: Trip.completed_by_month
       }
     }
   end

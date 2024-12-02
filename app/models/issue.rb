@@ -3,7 +3,7 @@ class Issue < ApplicationRecord
 
   enum priority: [:low, :medium, :high]
   scope :open_count, -> { where(completed: false).count }
-  scope :completed_count, -> { where(completed: true).count }
+  # scope :completed_count, -> { where(completed: true).count }
   scope :overdue_count, -> { where('due_date < ? AND completed = ?', Date.today, false).count }
 
   # associations

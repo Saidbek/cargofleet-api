@@ -37,7 +37,7 @@ class API::TripsController < API::BaseController
   def complete
     @driver = Driver.find(params[:driver_id])
     @trip = @driver.trips.find(params[:id])
-    if @trip.update(completed: true)
+    if @trip.complete
       render json: @trip, status: :no_content
     else
       render json: @trip.errors, status: :unprocessable_entity

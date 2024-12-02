@@ -1,6 +1,10 @@
 require 'faker'
 
-TEAMS = %w[team1 team2 team3 team4 team5].freeze
+TEAMS = %w[team1 team2 team3].freeze
+VEHICLES_PER_TEAM = 100
+ISSUES_PER_TEAM = 100
+DRIVERS_PER_TEAM = 100
+TRIPS_PER_TEAM = 1000
 
 unless Account.any?
   TEAMS.each do |team_name|
@@ -42,11 +46,9 @@ TEAMS.each do |team_name|
     ["Ashok Leyland Guru", "Ashok Leyland Captain"],
     ["Higer KLQ6109GQE", "Higer KLQ6129Q"]
   ]
-
   ActsAsTenant.with_tenant(Account.find_by(name: team_name)) do
     unless Vehicle.any?
-      # create vehicles
-      100.times.map do
+      VEHICLES_PER_TEAM.times.map do
         model = freight_trucks.sample.sample
         vehicle_attrs = {
           model: model,
@@ -60,10 +62,8 @@ TEAMS.each do |team_name|
       end
     end
 
-
     unless Issue.any?
-      # create issues
-      100.times.map do
+      ISSUES_PER_TEAM.times.map do
         issue_attrs = {
           vehicle: Vehicle.all.sample,
           description: Faker::Lorem.sentence(word_count: 10),
@@ -75,8 +75,7 @@ TEAMS.each do |team_name|
     end
 
     unless Driver.any?
-      # create driver
-      100.times.map do
+      DRIVERS_PER_TEAM.times.map do
         first_name = Faker::Name.first_name
         last_name = Faker::Name.last_name
         driver_attrs = {
@@ -98,22 +97,32 @@ TEAMS.each do |team_name|
     end
 
     unless Trip.any?
-      100.times.map do
+      TRIPS_PER_TEAM.times.map do
         vehicle = Vehicle.all.sample
         driver = Driver.all.sample
+        start_date = Faker::Date.between(from: 1.year.ago, to: Date.today - 1.week)
+        end_date = start_date + rand(1..7).days
 
-        Trip.create!(driver: driver,
-                     vehicle: vehicle,
-                     departure_location: Faker::Address.city,
-                     arrival_location: Faker::Address.city,
-                     start_date: Faker::Date.between(from: Date.today - 4.weeks, to: Date.today - 3.weeks),
-                     end_date: Faker::Date.between(from: Date.today - 2.weeks, to: Date.today),
-                     distance: "#{rand(1000)} miles",
-                     duration: "#{rand(100)} hours"
+        trip = Trip.create!(
+          driver: driver,
+          vehicle: vehicle,
+          departure_location: Faker::Address.city,
+          arrival_location: Faker::Address.city,
+          start_date: start_date,
+          end_date: end_date,
+          distance: "#{rand(1000)} miles",
+          duration: "#{rand(100)} hours"
         )
+
+        # Randomly complete 80% of trips
+        if rand < 0.8
+          trip.update(
+            completed: true, 
+            completed_at: Faker::Date.between(from: end_date, to: [end_date + 2.days, Date.today].min)
+          )
+        end
       end
     end
-
   end
 end
 

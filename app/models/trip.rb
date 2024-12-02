@@ -7,6 +7,14 @@ class Trip < ApplicationRecord
   scope :completed_count, -> { where(completed: true).count }
   scope :ongoing_count, -> { where(completed: false).count }
   scope :last_30_days_count, -> { where('start_date >= ?', 30.days.ago).count }
+  scope :completed_by_month, -> {
+    where(completed: true)
+    .where('completed_at >= ?', 1.year.ago.beginning_of_year)
+    .group("DATE_TRUNC('month', completed_at)")
+    .order("DATE_TRUNC('month', completed_at)")
+    .count
+    .values
+  }
 
   # methods
   def as_json(options = {})
@@ -28,4 +36,8 @@ class Trip < ApplicationRecord
     ],
     include: [:driver, :vehicle]
   }.freeze
+
+  def complete
+    update(completed: true, completed_at: Time.current)
+  end
 end
