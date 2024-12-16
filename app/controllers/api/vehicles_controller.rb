@@ -60,7 +60,13 @@ class API::VehiclesController < API::BaseController
   param :id, :number, required: true, desc: 'ID of the vehicle to delete'
 
   def destroy
+    if @vehicle.trips.exists?
+      render json: { error: 'Cannot delete vehicle because there are associated trips.' }, status: :unprocessable_entity
+      return
+    end
+
     @vehicle.destroy
+    head :no_content
   end
 
   private

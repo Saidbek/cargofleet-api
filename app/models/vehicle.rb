@@ -7,6 +7,7 @@ class Vehicle < ApplicationRecord
 
   # associations
   has_many :issues, dependent: :destroy
+  has_many :trips, dependent: :destroy
 
   # validations
   validates :manufacture_year,
@@ -15,7 +16,6 @@ class Vehicle < ApplicationRecord
             :fuel_type, presence: true
 
   # methods
-
   def self.assigned_count
     Trip.select(:vehicle_id).distinct.count
   end
