@@ -9,23 +9,21 @@ class API::DashboardController < API::BaseController
       property :inactive, Integer, desc: 'Number of inactive drivers (drivers with no trips)'
     end
     property :vehicles, Hash, desc: 'Vehicles' do
-      property :total, Integer, desc: 'Total number of vehicles'
       property :assigned, Integer, desc: 'Number of assigned vehicles (vehicles with at least one trip)'
       property :unassigned, Integer, desc: 'Number of unassigned vehicles (vehicles with no trips)'
       property :active, Integer, desc: 'Number of active vehicles'
       property :inactive, Integer, desc: 'Number of inactive vehicles'
     end
     property :issues, Hash, desc: 'Issues' do
-      property :total, Integer, desc: 'Total number of issues'
       property :open, Integer, desc: 'Number of open issues (issues not completed)'
       property :completed, Integer, desc: 'Number of completed issues'
-      property :overdue, Integer, desc: 'Number of overdue issues (issues past due date and not completed)'
+      property :completed_by_priority, Array, desc: 'Number of completed issues by priority'
     end
     property :trips, Hash, desc: 'Trips' do
-      property :total, Integer, desc: 'Total number of trips'
       property :completed, Integer, desc: 'Number of completed trips'
       property :ongoing, Integer, desc: 'Number of ongoing trips (trips not marked as completed)'
       property :last_30_days, Integer, desc: 'Number of trips in the last 30 days'
+      property :monthly_completed, Array, desc: 'Number of trips completed by month'
     end
   end
 

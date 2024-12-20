@@ -1,15 +1,19 @@
 class Issue < ApplicationRecord
   acts_as_tenant :account
 
-  enum priority: [:low, :medium, :high]
+  PRIORITIES = [:low, :medium, :high].freeze
+
+  enum priority: PRIORITIES
   scope :open_count, -> { where(completed: false).count }
   # scope :completed_count, -> { where(completed: true).count }
   scope :overdue_count, -> { where('due_date < ? AND completed = ?', Date.today, false).count }
   scope :completed_by_priority_counts, -> {
-    where(completed: true)
-    .group(:priority)
-    .count
-    .values
+    priority_counts = where(completed: true)
+                     .group(:priority)
+                     .count
+    PRIORITIES.map do |priority|
+      priority_counts[priority.to_s] || 0
+    end
   }
 
   # associations
