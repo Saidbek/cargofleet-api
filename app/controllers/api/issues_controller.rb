@@ -1,9 +1,9 @@
 class API::IssuesController < API::BaseController
   api :GET, '/issues', 'Retrieve a list of issues of a vehicle'
+  param :vehicle_id, :number, desc: 'ID of the associated vehicle'
   param :description, String, desc: 'Filter by description (optional)'
   param :page, String, desc: 'Page number for pagination (optional)'
   param :per_page, String, desc: 'Number of records per page (optional)'
-
   def index
     @vehicle = Vehicle.find(params[:vehicle_id])
     @issues = @vehicle.issues
@@ -18,9 +18,8 @@ class API::IssuesController < API::BaseController
   param :description, String, desc: 'Description of the issue'
   param :priority, String, desc: 'Priority of the issue'
   param :due_date, String, desc: 'Due date of the issue'
-
   def create
-    @issue = Issue.new(issue_create_params)
+    @issue = Issue.new(issue_params)
 
     if @issue.save
       render json: @issue, status: :created
@@ -32,16 +31,16 @@ class API::IssuesController < API::BaseController
   api :DELETE, '/vehicles/:vehicle_id/issues/:id', 'Delete an issue by ID'
   param :vehicle_id, :number, desc: 'ID of the associated vehicle'
   param :id, :number, required: true, desc: 'ID of the issue to delete'
-
   def destroy
     @vehicle = Vehicle.find(params[:vehicle_id])
     @issue = @vehicle.issues.find(params[:id])
     @issue.destroy
+    head :no_content
   end
 
-  api :PATCH, '/vehicles/:vehicle_id/issues/:id/complete', "Complete an issue"
-  param :vehicle, :number, desc: 'ID of the associated vehicle'
-  param :id, :number, desc: 'ID of the associated issue'
+  api :PATCH, '/vehicles/:vehicle_id/issues/:issue_id/complete', "Complete an issue"
+  param :vehicle_id, :number, desc: 'ID of the associated vehicle'
+  param :issue_id, :number, desc: 'ID of the associated issue'
   def complete
     @vehicle = Vehicle.find(params[:vehicle_id])
     @issue = @vehicle.issues.find(params[:issue_id])
@@ -52,9 +51,25 @@ class API::IssuesController < API::BaseController
     end
   end
 
+  api :PATCH, '/vehicles/:vehicle_id/issues/:id', 'Update an existing issue by ID'
+  param :vehicle_id, :number, desc: 'ID of the associated vehicle'
+  param :id, :number, desc: 'ID of the associated issue'
+  param :description, String, desc: 'Description of the issue'
+  param :priority, String, desc: 'Priority of the issue'
+  param :due_date, String, desc: 'Due date of the issue'
+  def update
+    @vehicle = Vehicle.find(params[:vehicle_id])
+    @issue = @vehicle.issues.find(params[:id])
+    if @issue.update(issue_params)
+      render json: @issue
+    else
+      render json: @issue.errors, status: :unprocessable_entity
+    end
+  end
+
   private
 
-  def issue_create_params
+  def issue_params
     params.permit(:vehicle_id, :description, :priority, :due_date)
   end
 end

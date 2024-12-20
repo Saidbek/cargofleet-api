@@ -68,7 +68,8 @@ TEAMS.each do |team_name|
           vehicle: Vehicle.all.sample,
           description: Faker::Lorem.sentence(word_count: 10),
           due_date: Faker::Date.between(from: 2.days.ago, to: Date.today),
-          priority: Issue.priorities.keys.sample
+          priority: Issue.priorities.keys.sample,
+          completed: [true, false].sample
         }
         Issue.create!(issue_attrs)
       end

@@ -5,6 +5,12 @@ class Issue < ApplicationRecord
   scope :open_count, -> { where(completed: false).count }
   # scope :completed_count, -> { where(completed: true).count }
   scope :overdue_count, -> { where('due_date < ? AND completed = ?', Date.today, false).count }
+  scope :completed_by_priority_counts, -> {
+    where(completed: true)
+    .group(:priority)
+    .count
+    .values
+  }
 
   # associations
   belongs_to :vehicle

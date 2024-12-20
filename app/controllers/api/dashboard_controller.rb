@@ -43,7 +43,8 @@ class API::DashboardController < API::BaseController
       },
       issues: {
         open: Issue.open_count,
-        overdue: Issue.overdue_count
+        overdue: Issue.overdue_count,
+        completed_by_priority: Issue.completed_by_priority_counts,
       },
       trips: {
         completed: Trip.completed_count,
