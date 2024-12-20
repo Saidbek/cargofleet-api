@@ -17,7 +17,9 @@ class API::DashboardController < API::BaseController
     property :issues, Hash, desc: 'Issues' do
       property :open, Integer, desc: 'Number of open issues (issues not completed)'
       property :completed, Integer, desc: 'Number of completed issues'
-      property :completed_by_priority, Array, desc: 'Number of completed issues by priority'
+      property :completed_by_priority, Array, desc: 'Number of completed issues by priority.
+        The array is ordered by priority: [low, medium, high] where the index 0 is low, index 1 is medium, 
+        and index 2 is high number of completed issues'
     end
     property :trips, Hash, desc: 'Trips' do
       property :completed, Integer, desc: 'Number of completed trips'
