@@ -22,7 +22,6 @@ class Trip < ApplicationRecord
   end
 
   AS_JSON_OPTS = {
-    methods: [:vehicle_name],
     only: [
       :id,
       :driver_id,
@@ -37,10 +36,6 @@ class Trip < ApplicationRecord
     ],
     include: [:driver, :vehicle]
   }.freeze
-
-  def vehicle_name
-    vehicle.name
-  end
 
   def complete
     update(completed: true, completed_at: Time.current)
