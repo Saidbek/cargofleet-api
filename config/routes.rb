@@ -10,12 +10,14 @@ Rails.application.routes.draw do
         resources :trips do
           member do
             patch :complete
+            patch :uncomplete
           end
         end
       end
       resources :vehicles do
         resources :issues do
           patch :complete
+          patch :uncomplete
         end
       end
     end

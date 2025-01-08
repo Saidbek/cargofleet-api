@@ -51,6 +51,19 @@ class API::IssuesController < API::BaseController
     end
   end
 
+  api :PATCH, '/vehicles/:vehicle_id/issues/:issue_id/uncomplete', "Uncomplete an issue"
+  param :vehicle_id, :number, desc: 'ID of the associated vehicle'
+  param :issue_id, :number, desc: 'ID of the associated issue'
+  def uncomplete
+    @vehicle = Vehicle.find(params[:vehicle_id])
+    @issue = @vehicle.issues.find(params[:issue_id])
+    if @issue.update(completed: false)
+      render json: @issue, status: :no_content
+    else
+      render json: @issue.errors, status: :unprocessable_entity
+    end
+  end
+
   api :PATCH, '/vehicles/:vehicle_id/issues/:id', 'Update an existing issue by ID'
   param :vehicle_id, :number, desc: 'ID of the associated vehicle'
   param :id, :number, desc: 'ID of the associated issue'

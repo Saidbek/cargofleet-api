@@ -44,6 +44,19 @@ class API::TripsController < API::BaseController
     end
   end
 
+  api :PATCH, '/drivers/:driver_id/trips/:id/uncomplete', "Uncomplete a driver's trip"
+  param :driver_id, :number, desc: 'ID of the associated driver'
+  param :id, :number, desc: 'ID of the associated trip'
+  def uncomplete
+    @driver = Driver.find(params[:driver_id])
+    @trip = @driver.trips.find(params[:id])
+    if @trip.uncomplete
+      render json: @trip, status: :no_content
+    else
+      render json: @trip.errors, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def trip_params

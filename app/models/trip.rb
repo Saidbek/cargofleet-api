@@ -41,4 +41,8 @@ class Trip < ApplicationRecord
   def complete
     update(completed: true, completed_at: Time.current)
   end
+
+  def uncomplete
+    update(completed: false, completed_at: nil)
+  end
 end
