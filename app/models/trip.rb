@@ -26,6 +26,7 @@ class Trip < ApplicationRecord
       :id,
       :driver_id,
       :vehicle_id,
+      :vehicle_name,
       :start_date,
       :end_date,
       :departure_location,
